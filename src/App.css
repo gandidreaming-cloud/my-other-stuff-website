@@ -67,3 +67,12 @@ p {
   font-size: 14px !important;
   text-align: center !important;
 }
+/* Hide external link icons for clean minimalist look */
+button svg[class*="lucide-external-link"] {
+  display: none !important;
+}
+
+/* Alternative: hide all SVGs except the main platform icons */
+button svg:last-child {
+  display: none !important;
+}
