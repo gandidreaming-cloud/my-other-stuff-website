@@ -30,7 +30,7 @@ const HomePage = () => {
         {/* Footer */}
         <div className="text-center mt-8 sm:mt-12 pt-6 sm:pt-8">
           <p className="text-xs sm:text-sm text-white/40">
-            © 2025 Gandi's Links
+            © 2025 my other stuff
           </p>
         </div>
       </div>
