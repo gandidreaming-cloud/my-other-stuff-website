@@ -21,6 +21,7 @@ const HomePage = () => {
               platform={link.platform}
               url={link.url}
               icon={link.icon}
+              type={link.type}
               variant="outline"
             />
           ))}

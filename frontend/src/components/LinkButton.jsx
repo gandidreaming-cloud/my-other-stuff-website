@@ -1,10 +1,17 @@
 import React from 'react';
 import { Button } from './ui/button';
 import { ExternalLink } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 
-const LinkButton = ({ platform, url, icon: Icon, variant = "outline" }) => {
+const LinkButton = ({ platform, url, icon: Icon, type = 'external', variant = "outline" }) => {
+  const navigate = useNavigate();
+
   const handleClick = () => {
-    window.open(url, '_blank', 'noopener,noreferrer');
+    if (type === 'internal') {
+      navigate(url);
+    } else {
+      window.open(url, '_blank', 'noopener,noreferrer');
+    }
   };
 
   return (
@@ -15,7 +22,9 @@ const LinkButton = ({ platform, url, icon: Icon, variant = "outline" }) => {
     >
       <Icon className="w-4 h-4 sm:w-5 sm:h-5 text-white" />
       <span className="flex-1 text-center text-white">{platform}</span>
-      <ExternalLink className="w-3 h-3 sm:w-4 sm:h-4 opacity-0 group-hover:opacity-100 transition-opacity text-white/70" />
+      {type === 'external' && (
+        <ExternalLink className="w-3 h-3 sm:w-4 sm:h-4 opacity-0 group-hover:opacity-100 transition-opacity text-white/70" />
+      )}
     </Button>
   );
 };
