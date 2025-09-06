@@ -2,6 +2,10 @@
   background-color: black;
   min-height: 100vh;
   color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 32px 16px;
 }
 
 body {
@@ -13,23 +17,53 @@ body {
     sans-serif;
 }
 
-button {
-  background-color: rgba(255, 255, 255, 0.05) !important;
-  border: 1px solid rgba(255, 255, 255, 0.15) !important;
+h1 {
+  font-size: 2.5rem !important;
+  font-weight: bold !important;
+  text-align: center !important;
+  margin-bottom: 48px !important;
   color: white !important;
-  padding: 16px 24px !important;
-  border-radius: 12px !important;
+}
+
+/* Container for buttons */
+.button-container {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  width: 100%;
+  max-width: 400px;
+  align-items: center;
+}
+
+button {
+  background-color: transparent !important;
+  border: 1px solid rgba(255, 255, 255, 0.2) !important;
+  color: white !important;
+  padding: 14px 24px !important;
+  border-radius: 8px !important;
   cursor: pointer !important;
-  transition: all 0.3s ease !important;
+  transition: all 0.2s ease !important;
   font-size: 16px !important;
   font-weight: 500 !important;
-  width: 320px !important;
-  margin: 8px !important;
+  width: 100% !important;
+  max-width: 384px !important;
+  height: 56px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 12px !important;
 }
 
 button:hover {
   background-color: rgba(255, 255, 255, 0.1) !important;
-  border-color: rgba(255, 255, 255, 0.3) !important;
-  transform: translateY(-2px) !important;
-  box-shadow: 0 8px 25px rgba(255, 255, 255, 0.1) !important;
+  border-color: rgba(255, 255, 255, 0.4) !important;
+  transform: scale(1.02) !important;
+}
+
+/* Footer */
+p {
+  margin-top: 48px !important;
+  color: rgba(255, 255, 255, 0.4) !important;
+  font-size: 14px !important;
+  text-align: center !important;
 }
