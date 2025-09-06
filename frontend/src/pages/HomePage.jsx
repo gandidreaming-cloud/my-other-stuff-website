@@ -9,7 +9,7 @@ const HomePage = () => {
         {/* Header */}
         <div className="text-center mb-8 sm:mb-12">
           <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-white mb-2 sm:mb-4">
-            Gandi's Links
+            my other stuff
           </h1>
         </div>
 
