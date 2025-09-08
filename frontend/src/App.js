@@ -139,9 +139,20 @@ function App() {
 
   // Registration form
   const [regForm, setRegForm] = useState({
-    name: "",
+    nickname: "",
     email: ""
   });
+
+  // Login form  
+  const [loginForm, setLoginForm] = useState({
+    nickname: "",
+    magic_word: ""
+  });
+
+  // Registration success state
+  const [registrationSuccess, setRegistrationSuccess] = useState(false);
+  const [magicWord, setMagicWord] = useState("");
+  const [showLogin, setShowLogin] = useState(false);
 
   // Submission form
   const [subForm, setSubForm] = useState({
