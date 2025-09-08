@@ -608,7 +608,7 @@ function App() {
               <CardHeader>
                 <CardTitle className="flex items-center gap-2 text-black">
                   <Users className="w-5 h-5" />
-                  Community Rules
+                  community rules
                 </CardTitle>
               </CardHeader>
               <CardContent className="text-sm text-black space-y-2">
