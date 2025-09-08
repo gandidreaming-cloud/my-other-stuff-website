@@ -482,8 +482,14 @@ function App() {
     }
   };
 
-  // Admin access is restricted to site owner only
-  // const makeAdmin = async () => { ... } - REMOVED
+  const handleLogout = () => {
+    localStorage.removeItem('boringUser');
+    setCurrentUser(null);
+    setShowOnboarding(true);
+    setShowRegistration(false);
+    setShowLogin(false);
+    toast.success("logged out successfully");
+  };
 
   // Onboarding Question Screen
   if (showOnboarding && !currentUser) {
