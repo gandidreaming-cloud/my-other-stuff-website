@@ -689,7 +689,7 @@ function App() {
                 className="w-full bg-white text-black border-2 border-black hover:bg-black hover:text-white" 
                 disabled={currentUser.tokens_remaining <= 0}
               >
-                Submit for Daily Lottery
+                submit for daily lottery
               </Button>
             </form>
           </DialogContent>
