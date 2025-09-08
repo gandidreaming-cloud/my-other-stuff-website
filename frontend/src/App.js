@@ -305,24 +305,24 @@ function App() {
       <div className="min-h-screen bg-white flex items-center justify-center p-4">
         <Toaster />
         <div className="w-full max-w-md text-center">
-          <div className="mb-12">
-            <h1 className="text-6xl font-light text-black mb-4">boring</h1>
-            <p className="text-xl text-black mb-8">ordinary is extraordinary</p>
+          <div className="mb-8">
+            <h1 className="text-6xl font-light text-black mb-2">boooring</h1>
+            <p className="text-xl text-black mb-6">ordinary is extraordinary</p>
           </div>
           
-          <div className="space-y-8">
-            <h2 className="text-2xl text-black">Are you<br />boring?</h2>
+          <div className="space-y-4">
+            <h2 className="text-2xl text-black mb-2">Are you boring?</h2>
             
-            <div className="flex justify-center gap-8">
+            <div className="flex justify-center gap-6">
               <Button 
                 onClick={() => handleBoringAnswer(true)}
-                className="px-8 py-3 bg-white text-black border-2 border-black hover:bg-black hover:text-white"
+                className="px-6 py-2 bg-white text-black border-2 border-black hover:bg-black hover:text-white"
               >
                 Yes
               </Button>
               <Button 
                 onClick={() => handleBoringAnswer(false)}
-                className="px-8 py-3 bg-white text-black border-2 border-black hover:bg-black hover:text-white"
+                className="px-6 py-2 bg-white text-black border-2 border-black hover:bg-black hover:text-white"
               >
                 No
               </Button>
