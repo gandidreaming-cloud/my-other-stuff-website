@@ -440,7 +440,7 @@ function App() {
                 size="sm"
                 className="bg-white text-black border-2 border-black hover:bg-black hover:text-white"
               >
-                Submit Boring Content
+                submit boring content
               </Button>
               
               {currentUser.is_admin && (
