@@ -41,15 +41,21 @@ class InteractionType(str, Enum):
 # Models
 class User(BaseModel):
     id: str = Field(default_factory=lambda: str(uuid.uuid4()))
-    name: str
+    nickname: str
     email: EmailStr
+    magic_word: str
     tokens_remaining: int = 3
     is_admin: bool = False
     created_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
+    last_login: Optional[datetime] = None
 
 class UserCreate(BaseModel):
-    name: str
+    nickname: str
     email: EmailStr
+
+class UserLogin(BaseModel):
+    nickname: str
+    magic_word: str
 
 class Submission(BaseModel):
     id: str = Field(default_factory=lambda: str(uuid.uuid4()))
