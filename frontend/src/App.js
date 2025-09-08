@@ -828,7 +828,7 @@ function App() {
       <Toaster />
       <div className="w-full max-w-md text-center">
         <div className="mb-12">
-          <h1 className="text-6xl font-light text-black mb-4">boring</h1>
+          <h1 className="text-6xl font-light text-black mb-2">boooring</h1>
           <p className="text-xl text-black">ordinary is extraordinary</p>
         </div>
         
