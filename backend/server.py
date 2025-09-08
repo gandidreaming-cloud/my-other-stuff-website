@@ -406,42 +406,33 @@ async def get_interactions(submission_id: str):
     return [Interaction(**parse_from_mongo(interaction)) for interaction in interactions]
 
 # Admin routes
-@api_router.post("/admin/create-user-with-magic-word")
-async def create_user_with_magic_word(nickname: str, email: str, magic_word: str, admin_user_id: str):
-    """Admin endpoint to create user with specific magic word"""
-    # Check if user is admin
-    admin_data = await db.users.find_one({"id": admin_user_id})
-    if not admin_data or not admin_data.get("is_admin", False):
-        raise HTTPException(status_code=403, detail="Admin access required")
+@api_router.post("/admin/create-owner")
+async def create_owner():
+    """One-time endpoint to create the owner account"""
     
-    # Check if email already exists
-    existing_email = await db.users.find_one({"email": email})
-    if existing_email:
-        # Update existing user's magic word
+    # Check if owner already exists
+    existing_owner = await db.users.find_one({"email": "gandi.pacific@gmail.com"})
+    if existing_owner:
+        # Update magic word
         await db.users.update_one(
-            {"email": email},
-            {"$set": {"magic_word": magic_word, "nickname": nickname}}
+            {"email": "gandi.pacific@gmail.com"},
+            {"$set": {"magic_word": "igorrononnghbrgbii", "nickname": "gandi", "is_admin": True}}
         )
-        return {"message": f"Updated user {email} with new magic word"}
+        return {"message": "Updated owner account with magic word: igorrononnghbrgbii"}
     
-    # Check if nickname already exists
-    existing_nickname = await db.users.find_one({"nickname": nickname})
-    if existing_nickname:
-        raise HTTPException(status_code=400, detail="Nickname already taken")
-    
-    # Create new user
-    user_data = {
+    # Create owner account
+    owner_data = {
         "id": str(uuid.uuid4()),
-        "nickname": nickname,
-        "email": email,
-        "magic_word": magic_word,
-        "tokens_remaining": 3,
-        "is_admin": True,  # Make owner admin
+        "nickname": "gandi",
+        "email": "gandi.pacific@gmail.com", 
+        "magic_word": "igorrononnghbrgbii",
+        "tokens_remaining": 999,  # Give owner lots of tokens
+        "is_admin": True,
         "created_at": datetime.now(timezone.utc).isoformat()
     }
     
-    await db.users.insert_one(user_data)
-    return {"message": f"Created user {email} with magic word {magic_word}"}
+    await db.users.insert_one(owner_data)
+    return {"message": "Created owner account - nickname: gandi, magic_word: igorrononnghbrgbii"}
 
 @api_router.post("/admin/make-admin")
 async def make_admin(user_id: str):
