@@ -272,59 +272,61 @@ function App() {
           </div>
           
           <div className="space-y-6">
-            <div>
-              <Label htmlFor="name" className="text-black font-medium">name</Label>
-              <Input
-                id="name"
-                value={regForm.name}
-                onChange={(e) => setRegForm({...regForm, name: e.target.value})}
-                className="mt-1 border-black focus:border-black focus:ring-black"
-                required
-              />
-            </div>
-            
-            <div>
-              <Label htmlFor="email" className="text-black font-medium">email</Label>
-              <Input
-                id="email"
-                type="email"
-                value={regForm.email}
-                onChange={(e) => setRegForm({...regForm, email: e.target.value})}
-                className="mt-1 border-black focus:border-black focus:ring-black"
-                required
-              />
-            </div>
-            
-            <div>
-              <Label htmlFor="password" className="text-black font-medium">password</Label>
-              <Input
-                id="password"
-                type="password"
-                value={regForm.password}
-                onChange={(e) => setRegForm({...regForm, password: e.target.value})}
-                className="mt-1 border-black focus:border-black focus:ring-black"
-                required
-              />
-            </div>
-            
-            <div>
-              <Label htmlFor="boring-answer" className="text-black font-medium">are you boring enough?</Label>
-              <Textarea
-                id="boring-answer"
-                value={regForm.boring_answer}
-                onChange={(e) => setRegForm({...regForm, boring_answer: e.target.value})}
-                placeholder="tell us why you're perfectly, wonderfully boring..."
-                className="mt-1 border-black focus:border-black focus:ring-black"
-                required
-              />
-            </div>
-            
-            <Button 
-              onClick={handleRegistration} 
-              className="w-full bg-white text-black border-2 border-black hover:bg-black hover:text-white"
-            >
-              registrate
-            </Button>
+            <form onSubmit={handleRegistration} className="space-y-6">
+              <div>
+                <Label htmlFor="name" className="text-black font-medium">name</Label>
+                <Input
+                  id="name"
+                  value={regForm.name}
+                  onChange={(e) => setRegForm({...regForm, name: e.target.value})}
+                  className="mt-1 border-black focus:border-black focus:ring-black"
+                  required
+                />
+              </div>
+              
+              <div>
+                <Label htmlFor="email" className="text-black font-medium">email</Label>
+                <Input
+                  id="email"
+                  type="email"
+                  value={regForm.email}
+                  onChange={(e) => setRegForm({...regForm, email: e.target.value})}
+                  className="mt-1 border-black focus:border-black focus:ring-black"
+                  required
+                />
+              </div>
+              
+              <div>
+                <Label htmlFor="password" className="text-black font-medium">password</Label>
+                <Input
+                  id="password"
+                  type="password"
+                  value={regForm.password}
+                  onChange={(e) => setRegForm({...regForm, password: e.target.value})}
+                  className="mt-1 border-black focus:border-black focus:ring-black"
+                  required
+                />
+              </div>
+              
+              <div>
+                <Label htmlFor="boring-answer" className="text-black font-medium">are you boring enough?</Label>
+                <Textarea
+                  id="boring-answer"
+                  value={regForm.boring_answer}
+                  onChange={(e) => setRegForm({...regForm, boring_answer: e.target.value})}
+                  placeholder="tell us why you're perfectly, wonderfully boring..."
+                  className="mt-1 border-black focus:border-black focus:ring-black"
+                  required
+                />
+              </div>
+              
+              <Button 
+                type="submit"
+                className="w-full bg-white text-black border-2 border-black hover:bg-black hover:text-white"
+              >
+                registrate
+              </Button>
+            </form>
           </div>
         </div>
       </div>
