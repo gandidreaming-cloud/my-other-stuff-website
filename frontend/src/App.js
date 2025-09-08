@@ -35,9 +35,7 @@ function App() {
   // Registration form
   const [regForm, setRegForm] = useState({
     name: "",
-    email: "",
-    password: "",
-    boring_answer: ""
+    email: ""
   });
 
   // Submission form
