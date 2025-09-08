@@ -227,28 +227,32 @@ function App() {
   const LoginForm = () => {
     const [email, setEmail] = useState("");
     return (
-      <Card className="w-full max-w-md mx-auto">
+      <Card className="w-full max-w-md mx-auto border-black">
         <CardHeader>
-          <CardTitle>Login to Boring</CardTitle>
+          <CardTitle className="text-black">Login to Boring</CardTitle>
         </CardHeader>
         <CardContent className="space-y-4">
           <div>
-            <Label htmlFor="email">Email</Label>
+            <Label htmlFor="email" className="text-black">Email</Label>
             <Input
               id="email"
               type="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               placeholder="your@email.com"
+              className="border-black focus:border-black focus:ring-black"
             />
           </div>
-          <Button onClick={() => handleLogin(email)} className="w-full">
+          <Button 
+            onClick={() => handleLogin(email)} 
+            className="w-full bg-white text-black border-2 border-black hover:bg-black hover:text-white"
+          >
             Login
           </Button>
           <Button
             variant="outline"
             onClick={() => setShowRegistration(true)}
-            className="w-full"
+            className="w-full border-black text-black hover:bg-black hover:text-white"
           >
             Register Instead
           </Button>
