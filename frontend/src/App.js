@@ -331,22 +331,66 @@ function App() {
   const handleRegistration = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post(`${API}/users`, regForm);
-      setCurrentUser(response.data);
-      setShowRegistration(false);
-      toast.success("Welcome to Boring! You have 3 free tokens to start.");
+      const response = await axios.post(`${API}/register`, regForm);
+      setMagicWord(response.data.magic_word);
+      setRegistrationSuccess(true);
+      toast.success("registration successful!");
     } catch (error) {
-      toast.error(error.response?.data?.detail || "Registration failed");
+      toast.error(error.response?.data?.detail || "registration failed");
     }
   };
 
-  const handleLogin = async (email) => {
+  const handleLogin = async (e) => {
+    e.preventDefault();
     try {
-      const response = await axios.get(`${API}/users/email/${email}`);
-      setCurrentUser(response.data);
-      toast.success(`Welcome back, ${response.data.name}!`);
+      const response = await axios.post(`${API}/login`, loginForm);
+      const user = response.data;
+      
+      // Save session for 90 days
+      const expiryDate = new Date();
+      expiryDate.setDate(expiryDate.getDate() + 90);
+      
+      const sessionData = {
+        id: user.id,
+        nickname: user.nickname,
+        email: user.email,
+        tokens_remaining: user.tokens_remaining,
+        is_admin: user.is_admin,
+        created_at: user.created_at,
+        session_expires: expiryDate.toISOString()
+      };
+      
+      localStorage.setItem('boringUser', JSON.stringify(sessionData));
+      setCurrentUser(sessionData);
+      setShowLogin(false);
+      setShowRegistration(false);
+      setShowOnboarding(false);
+      
+      toast.success(`welcome back, ${user.nickname}!`);
     } catch (error) {
-      toast.error("User not found. Please register first.");
+      toast.error(error.response?.data?.detail || "login failed");
+    }
+  };
+
+  const handleContinueToBoring = () => {
+    setRegistrationSuccess(false);
+    setShowRegistration(false);
+    setShowLogin(true);
+  };
+
+  const copyToClipboard = async (text) => {
+    try {
+      await navigator.clipboard.writeText(text);
+      toast.success("magic word copied!");
+    } catch (error) {
+      // Fallback for older browsers
+      const textArea = document.createElement('textarea');
+      textArea.value = text;
+      document.body.appendChild(textArea);
+      textArea.select();
+      document.execCommand('copy');
+      document.body.removeChild(textArea);
+      toast.success("magic word copied!");
     }
   };
 
