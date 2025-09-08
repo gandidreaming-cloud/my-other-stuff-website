@@ -659,7 +659,7 @@ function App() {
               </div>
               
               <div>
-                <Label htmlFor="instagram" className="text-black">Instagram Link (optional)</Label>
+                <Label htmlFor="instagram" className="text-black">instagram link (optional)</Label>
                 <Input
                   id="instagram"
                   value={subForm.instagram_link}
@@ -670,7 +670,7 @@ function App() {
               </div>
               
               <div>
-                <Label htmlFor="tiktok" className="text-black">TikTok Link (optional)</Label>
+                <Label htmlFor="tiktok" className="text-black">tiktok link (optional)</Label>
                 <Input
                   id="tiktok"
                   value={subForm.tiktok_link}
@@ -681,7 +681,7 @@ function App() {
               </div>
               
               <div className="bg-white border border-black p-3 rounded-lg text-sm text-black">
-                This will use 1 token. You have {currentUser.tokens_remaining} tokens remaining.
+                this will use 1 token. you have {currentUser.tokens_remaining} tokens remaining.
               </div>
               
               <Button 
