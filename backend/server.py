@@ -246,6 +246,19 @@ async def create_submission(submission: SubmissionCreate, user_id: str):
 @api_router.get("/submissions/pending", response_model=List[Submission])
 async def get_pending_submissions():
     submissions = await db.submissions.find({"status": "pending"}).sort("created_at", 1).to_list(1000)
+    
+    # Handle legacy data
+    for submission in submissions:
+        if "user_nickname" not in submission and "user_name" in submission:
+            submission["user_nickname"] = submission["user_name"]
+        elif "user_nickname" not in submission:
+            # Get nickname from user data
+            user_data = await db.users.find_one({"id": submission["user_id"]})
+            if user_data:
+                submission["user_nickname"] = user_data.get("nickname", user_data.get("name", "unknown"))
+            else:
+                submission["user_nickname"] = "unknown"
+    
     return [Submission(**parse_from_mongo(sub)) for sub in submissions]
 
 @api_router.put("/submissions/{submission_id}/status")
