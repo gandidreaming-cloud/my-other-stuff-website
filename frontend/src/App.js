@@ -167,10 +167,33 @@ function App() {
   useEffect(() => {
     fetchTodayWinner();
     
+    // Check for saved user session
+    const savedUser = localStorage.getItem('boringUser');
+    if (savedUser) {
+      try {
+        const userData = JSON.parse(savedUser);
+        const expiryDate = new Date(userData.session_expires);
+        const now = new Date();
+        
+        if (now < expiryDate) {
+          // Session still valid
+          setCurrentUser(userData);
+          setShowOnboarding(false);
+          setShowRegistration(false);
+          setShowLogin(false);
+        } else {
+          // Session expired
+          localStorage.removeItem('boringUser');
+        }
+      } catch (error) {
+        localStorage.removeItem('boringUser');
+      }
+    }
+    
     // Check if user is blocked (from localStorage)
     const blockUntil = localStorage.getItem('boringBlockUntil');
     const savedBlockMessage = localStorage.getItem('boringBlockMessage');
-    if (blockUntil) {
+    if (blockUntil && !savedUser) { // Only show block if not logged in
       const blockTime = new Date(blockUntil);
       const now = new Date();
       if (now < blockTime) {
