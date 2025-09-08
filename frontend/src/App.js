@@ -31,6 +31,7 @@ function App() {
   const [regForm, setRegForm] = useState({
     name: "",
     email: "",
+    password: "",
     boring_answer: ""
   });
 
