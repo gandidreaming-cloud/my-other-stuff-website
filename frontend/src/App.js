@@ -463,8 +463,8 @@ function App() {
           
           <div className="space-y-6">
             <p className="text-lg text-black leading-relaxed">
-              sorry, but you are not boring enough to use this site.<br />
-              reflect on your behavior — you have {formatTime(blockTimeRemaining)}.
+              {blockMessage}<br />
+              you have {formatTime(blockTimeRemaining)}.
             </p>
           </div>
         </div>
