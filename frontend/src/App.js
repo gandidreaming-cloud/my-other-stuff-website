@@ -461,7 +461,7 @@ function App() {
                   size="sm"
                   className="text-black hover:bg-black hover:text-white"
                 >
-                  Become Admin
+                  become admin
                 </Button>
               )}
             </div>
