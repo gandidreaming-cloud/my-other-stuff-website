@@ -489,13 +489,16 @@ function App() {
             </CardContent>
           </Card>
         ) : (
-          <Card className="mb-8 text-center py-12">
+          <Card className="mb-8 text-center py-12 border-black">
             <CardContent>
-              <Clock className="w-12 h-12 text-amber-400 mx-auto mb-4" />
-              <h2 className="text-2xl font-bold text-amber-900 mb-2">No Winner Yet Today</h2>
-              <p className="text-amber-700">The daily lottery runs at 4PM Berlin time</p>
+              <Clock className="w-12 h-12 text-black mx-auto mb-4" />
+              <h2 className="text-2xl font-light text-black mb-2">No Winner Yet Today</h2>
+              <p className="text-black">The daily lottery runs at 4PM Berlin time</p>
               {currentUser.is_admin && (
-                <Button onClick={runLottery} className="mt-4">
+                <Button 
+                  onClick={runLottery} 
+                  className="mt-4 bg-white text-black border-2 border-black hover:bg-black hover:text-white"
+                >
                   Run Lottery Now (Admin)
                 </Button>
               )}
@@ -505,14 +508,14 @@ function App() {
 
         {/* Info Cards */}
         <div className="grid md:grid-cols-3 gap-6">
-          <Card>
+          <Card className="border-black">
             <CardHeader>
-              <CardTitle className="flex items-center gap-2 text-amber-900">
+              <CardTitle className="flex items-center gap-2 text-black">
                 <Trophy className="w-5 h-5" />
                 How It Works
               </CardTitle>
             </CardHeader>
-            <CardContent className="text-sm text-gray-600 space-y-2">
+            <CardContent className="text-sm text-black space-y-2">
               <p>• Submit your most boring moment using a token</p>
               <p>• Admin reviews and approves submissions</p>
               <p>• One random winner chosen daily at 4PM Berlin time</p>
@@ -520,14 +523,14 @@ function App() {
             </CardContent>
           </Card>
           
-          <Card>
+          <Card className="border-black">
             <CardHeader>
-              <CardTitle className="flex items-center gap-2 text-amber-900">
+              <CardTitle className="flex items-center gap-2 text-black">
                 <Users className="w-5 h-5" />
                 Community Rules
               </CardTitle>
             </CardHeader>
-            <CardContent className="text-sm text-gray-600 space-y-2">
+            <CardContent className="text-sm text-black space-y-2">
               <p>• Celebrate the ordinary and mundane</p>
               <p>• No judgment, only support</p>
               <p>• Keep it boring and wholesome</p>
@@ -535,14 +538,14 @@ function App() {
             </CardContent>
           </Card>
           
-          <Card>
+          <Card className="border-black">
             <CardHeader>
-              <CardTitle className="flex items-center gap-2 text-amber-900">
+              <CardTitle className="flex items-center gap-2 text-black">
                 <FileText className="w-5 h-5" />
                 Your Stats
               </CardTitle>
             </CardHeader>
-            <CardContent className="text-sm text-gray-600 space-y-2">
+            <CardContent className="text-sm text-black space-y-2">
               <p>Tokens remaining: <span className="font-bold">{currentUser.tokens_remaining}</span></p>
               <p>Member since: {new Date(currentUser.created_at).toLocaleDateString()}</p>
               <p>Boring level: <span className="font-bold">Maximum</span></p>
