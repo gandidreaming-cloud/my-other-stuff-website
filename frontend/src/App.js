@@ -593,7 +593,7 @@ function App() {
               <CardHeader>
                 <CardTitle className="flex items-center gap-2 text-black">
                   <Trophy className="w-5 h-5" />
-                  How It Works
+                  how it works
                 </CardTitle>
               </CardHeader>
               <CardContent className="text-sm text-black space-y-2">
