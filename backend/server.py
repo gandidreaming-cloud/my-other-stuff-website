@@ -406,6 +406,43 @@ async def get_interactions(submission_id: str):
     return [Interaction(**parse_from_mongo(interaction)) for interaction in interactions]
 
 # Admin routes
+@api_router.post("/admin/create-user-with-magic-word")
+async def create_user_with_magic_word(nickname: str, email: str, magic_word: str, admin_user_id: str):
+    """Admin endpoint to create user with specific magic word"""
+    # Check if user is admin
+    admin_data = await db.users.find_one({"id": admin_user_id})
+    if not admin_data or not admin_data.get("is_admin", False):
+        raise HTTPException(status_code=403, detail="Admin access required")
+    
+    # Check if email already exists
+    existing_email = await db.users.find_one({"email": email})
+    if existing_email:
+        # Update existing user's magic word
+        await db.users.update_one(
+            {"email": email},
+            {"$set": {"magic_word": magic_word, "nickname": nickname}}
+        )
+        return {"message": f"Updated user {email} with new magic word"}
+    
+    # Check if nickname already exists
+    existing_nickname = await db.users.find_one({"nickname": nickname})
+    if existing_nickname:
+        raise HTTPException(status_code=400, detail="Nickname already taken")
+    
+    # Create new user
+    user_data = {
+        "id": str(uuid.uuid4()),
+        "nickname": nickname,
+        "email": email,
+        "magic_word": magic_word,
+        "tokens_remaining": 3,
+        "is_admin": True,  # Make owner admin
+        "created_at": datetime.now(timezone.utc).isoformat()
+    }
+    
+    await db.users.insert_one(user_data)
+    return {"message": f"Created user {email} with magic word {magic_word}"}
+
 @api_router.post("/admin/make-admin")
 async def make_admin(user_id: str):
     """Temporary endpoint to make a user admin - remove in production"""
