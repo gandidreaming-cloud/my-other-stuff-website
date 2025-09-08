@@ -534,7 +534,7 @@ function App() {
                   
                   <Button variant="ghost" size="sm" className="flex items-center gap-2 text-black hover:bg-black hover:text-white">
                     <Share2 className="w-4 h-4" />
-                    Share
+                    share
                   </Button>
                 </div>
                 
