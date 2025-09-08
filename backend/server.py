@@ -450,10 +450,8 @@ async def make_admin(user_id: str):
 
 @api_router.get("/admin/stats")
 async def get_admin_stats(admin_user_id: str):
-    # Check if user is admin
-    admin_data = await db.users.find_one({"id": admin_user_id})
-    if not admin_data or not admin_data.get("is_admin", False):
-        raise HTTPException(status_code=403, detail="Admin access required")
+    # Strict owner-only check
+    await verify_owner_admin(admin_user_id)
     
     total_users = await db.users.count_documents({})
     total_submissions = await db.submissions.count_documents({})
