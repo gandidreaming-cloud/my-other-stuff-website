@@ -138,7 +138,19 @@ def parse_from_mongo(item):
     # Keep winner_date as string - don't convert to datetime
     return item
 
-# Auth helper (simple check for admin)
+# Auth helper (strict admin check)
+async def verify_owner_admin(user_id: str):
+    """Verify that user is the site owner"""
+    user_data = await db.users.find_one({"id": user_id})
+    if not user_data:
+        raise HTTPException(status_code=404, detail="User not found")
+    
+    # Only allow gandi.pacific@gmail.com as admin
+    if user_data.get("email") != "gandi.pacific@gmail.com" or not user_data.get("is_admin", False):
+        raise HTTPException(status_code=403, detail="Access restricted to site owner only")
+    
+    return User(**parse_from_mongo(user_data))
+
 async def get_current_user(user_id: str):
     user_data = await db.users.find_one({"id": user_id})
     if not user_data:
