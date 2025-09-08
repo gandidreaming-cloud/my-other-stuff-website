@@ -248,10 +248,15 @@ function App() {
       setShowOnboarding(false);
       setShowRegistration(true);
     } else {
+      // Select random block message
+      const randomMessage = blockMessages[Math.floor(Math.random() * blockMessages.length)];
+      setBlockMessage(randomMessage);
+      
       // Block user for 10 minutes
       const blockUntil = new Date();
       blockUntil.setMinutes(blockUntil.getMinutes() + 10);
       localStorage.setItem('boringBlockUntil', blockUntil.toISOString());
+      localStorage.setItem('boringBlockMessage', randomMessage);
       
       setIsBlocked(true);
       setBlockTimeRemaining(600); // 10 minutes in seconds
@@ -265,8 +270,10 @@ function App() {
         if (currentTime >= blockTime) {
           setIsBlocked(false);
           setBlockTimeRemaining(0);
+          setBlockMessage("");
           setShowOnboarding(true);
           localStorage.removeItem('boringBlockUntil');
+          localStorage.removeItem('boringBlockMessage');
           clearInterval(timer);
         } else {
           const remaining = Math.ceil((blockTime - currentTime) / 1000);
