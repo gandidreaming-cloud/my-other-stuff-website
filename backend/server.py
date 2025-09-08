@@ -151,18 +151,52 @@ async def root():
     return {"message": "Welcome to Boooring - where ordinary is extraordinary!"}
 
 # User routes
-@api_router.post("/users", response_model=User)
-async def create_user(user: UserCreate):
-    # Check if email already exists
-    existing_user = await db.users.find_one({"email": user.email})
-    if existing_user:
-        raise HTTPException(status_code=400, detail="Email already registered")
+@api_router.post("/register", response_model=dict)
+async def register_user(user: UserCreate):
+    # Check if nickname already exists
+    existing_nickname = await db.users.find_one({"nickname": user.nickname})
+    if existing_nickname:
+        raise HTTPException(status_code=400, detail="nickname already taken")
     
+    # Check if email already exists
+    existing_email = await db.users.find_one({"email": user.email})
+    if existing_email:
+        raise HTTPException(status_code=400, detail="email already registered")
+    
+    # Generate unique magic word
+    magic_word = await ensure_unique_magic_word()
+    
+    # Create user
     user_dict = user.dict()
+    user_dict["magic_word"] = magic_word
     user_obj = User(**user_dict)
     user_data = prepare_for_mongo(user_obj.dict())
     await db.users.insert_one(user_data)
-    return user_obj
+    
+    return {
+        "message": "registration successful",
+        "magic_word": magic_word,
+        "user_id": user_obj.id
+    }
+
+@api_router.post("/login", response_model=User)
+async def login_user(login: UserLogin):
+    # Find user by nickname and magic_word
+    user_data = await db.users.find_one({
+        "nickname": login.nickname,
+        "magic_word": login.magic_word
+    })
+    
+    if not user_data:
+        raise HTTPException(status_code=401, detail="invalid nickname or magic word")
+    
+    # Update last login
+    await db.users.update_one(
+        {"id": user_data["id"]},
+        {"$set": {"last_login": datetime.now(timezone.utc).isoformat()}}
+    )
+    
+    return User(**parse_from_mongo(user_data))
 
 @api_router.get("/users/{user_id}", response_model=User)
 async def get_user(user_id: str):
