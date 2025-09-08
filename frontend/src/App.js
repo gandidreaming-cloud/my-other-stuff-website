@@ -52,6 +52,38 @@ function App() {
 
   useEffect(() => {
     fetchTodayWinner();
+    
+    // Check if user is blocked (from localStorage)
+    const blockUntil = localStorage.getItem('boringBlockUntil');
+    if (blockUntil) {
+      const blockTime = new Date(blockUntil);
+      const now = new Date();
+      if (now < blockTime) {
+        const remaining = Math.ceil((blockTime - now) / 1000);
+        setIsBlocked(true);
+        setBlockTimeRemaining(remaining);
+        setShowOnboarding(false);
+        
+        // Start countdown timer
+        const timer = setInterval(() => {
+          const currentTime = new Date();
+          if (currentTime >= blockTime) {
+            setIsBlocked(false);
+            setBlockTimeRemaining(0);
+            setShowOnboarding(true);
+            localStorage.removeItem('boringBlockUntil');
+            clearInterval(timer);
+          } else {
+            const remaining = Math.ceil((blockTime - currentTime) / 1000);
+            setBlockTimeRemaining(remaining);
+          }
+        }, 1000);
+        
+        return () => clearInterval(timer);
+      } else {
+        localStorage.removeItem('boringBlockUntil');
+      }
+    }
   }, []);
 
   useEffect(() => {
