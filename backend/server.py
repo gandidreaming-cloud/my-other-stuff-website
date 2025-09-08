@@ -228,7 +228,7 @@ async def create_submission(submission: SubmissionCreate, user_id: str):
     # Create submission
     submission_dict = submission.dict()
     submission_dict["user_id"] = user_id
-    submission_dict["user_name"] = user_obj.name
+    submission_dict["user_nickname"] = user_obj.nickname
     submission_obj = Submission(**submission_dict)
     
     # Save submission and decrease token
