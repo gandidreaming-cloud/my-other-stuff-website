@@ -430,7 +430,7 @@ function App() {
                   {currentUser.tokens_remaining} tokens
                 </Badge>
                 {currentUser.is_admin && (
-                  <Badge className="ml-2 bg-black text-white">Admin</Badge>
+                  <Badge className="ml-2 bg-black text-white">admin</Badge>
                 )}
               </div>
               
