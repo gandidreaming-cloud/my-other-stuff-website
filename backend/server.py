@@ -434,16 +434,11 @@ async def create_owner():
     await db.users.insert_one(owner_data)
     return {"message": "Created owner account - nickname: gandi, magic_word: igorrononnghbrgbii"}
 
+# Admin routes - RESTRICTED ACCESS
 @api_router.post("/admin/make-admin")
 async def make_admin(user_id: str):
-    """Temporary endpoint to make a user admin - remove in production"""
-    result = await db.users.update_one(
-        {"id": user_id},
-        {"$set": {"is_admin": True}}
-    )
-    if result.modified_count == 0:
-        raise HTTPException(status_code=404, detail="User not found")
-    return {"message": "User made admin"}
+    """BLOCKED - Only owner has admin access"""
+    raise HTTPException(status_code=403, detail="admin access is restricted to site owner only")
 
 @api_router.get("/admin/stats")
 async def get_admin_stats(admin_user_id: str):
