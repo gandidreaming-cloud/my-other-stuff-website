@@ -328,28 +328,28 @@ function App() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-amber-50 to-orange-100">
+    <div className="min-h-screen bg-white">
       <Toaster />
       
       {/* Header */}
-      <header className="bg-white/80 backdrop-blur-sm border-b border-amber-200 sticky top-0 z-50">
+      <header className="bg-white border-b border-black sticky top-0 z-50">
         <div className="max-w-6xl mx-auto px-4 py-4 flex justify-between items-center">
           <div className="flex items-center gap-3">
-            <h1 className="text-3xl font-bold text-amber-900">Boring</h1>
-            <Badge variant="outline" className="bg-amber-100 text-amber-800">
+            <h1 className="text-3xl font-light text-black">boring</h1>
+            <Badge variant="outline" className="bg-white text-black border-black">
               <Clock className="w-3 h-3 mr-1" />
               Daily Winner at 4PM Berlin
             </Badge>
           </div>
           
           <div className="flex items-center gap-4">
-            <div className="text-sm text-amber-700">
+            <div className="text-sm text-black">
               <span className="font-medium">{currentUser.name}</span>
-              <Badge className="ml-2 bg-amber-200 text-amber-800">
+              <Badge className="ml-2 bg-black text-white">
                 {currentUser.tokens_remaining} tokens
               </Badge>
               {currentUser.is_admin && (
-                <Badge className="ml-2 bg-blue-500 text-white">Admin</Badge>
+                <Badge className="ml-2 bg-black text-white">Admin</Badge>
               )}
             </div>
             
@@ -357,18 +357,29 @@ function App() {
               onClick={() => setShowSubmission(true)} 
               disabled={currentUser.tokens_remaining <= 0}
               size="sm"
+              className="bg-white text-black border-2 border-black hover:bg-black hover:text-white"
             >
               Submit Boring Content
             </Button>
             
             {currentUser.is_admin && (
-              <Button onClick={() => setShowAdmin(true)} variant="outline" size="sm">
+              <Button 
+                onClick={() => setShowAdmin(true)} 
+                variant="outline" 
+                size="sm"
+                className="border-black text-black hover:bg-black hover:text-white"
+              >
                 Admin Panel
               </Button>
             )}
             
             {!currentUser.is_admin && (
-              <Button onClick={makeAdmin} variant="ghost" size="sm">
+              <Button 
+                onClick={makeAdmin} 
+                variant="ghost" 
+                size="sm"
+                className="text-black hover:bg-black hover:text-white"
+              >
                 Become Admin
               </Button>
             )}
