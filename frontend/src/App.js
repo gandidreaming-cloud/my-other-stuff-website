@@ -1030,7 +1030,7 @@ function App() {
                     <CardContent className="pt-4">
                       <div className="flex justify-between items-start mb-3">
                         <div>
-                          <div className="font-medium text-black">{submission.user_name}</div>
+                          <div className="font-medium text-black">{submission.user_nickname}</div>
                           <div className="text-sm text-black">
                             {new Date(submission.created_at).toLocaleString()}
                           </div>
