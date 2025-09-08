@@ -270,6 +270,17 @@ async def get_today_winner():
     today = datetime.now(timezone.utc).date().isoformat()
     winner = await db.submissions.find_one({"is_winner": True, "winner_date": today})
     if winner:
+        # Handle legacy data that might not have user_nickname
+        if "user_nickname" not in winner and "user_name" in winner:
+            winner["user_nickname"] = winner["user_name"]
+        elif "user_nickname" not in winner:
+            # Get nickname from user data
+            user_data = await db.users.find_one({"id": winner["user_id"]})
+            if user_data:
+                winner["user_nickname"] = user_data.get("nickname", user_data.get("name", "unknown"))
+            else:
+                winner["user_nickname"] = "unknown"
+        
         return Submission(**parse_from_mongo(winner))
     return None
 
