@@ -343,7 +343,7 @@ async def create_interaction(submission_id: str, interaction: InteractionCreate,
     interaction_dict = interaction.dict()
     interaction_dict["submission_id"] = submission_id
     interaction_dict["user_id"] = user_id
-    interaction_dict["user_name"] = user_obj.name
+    interaction_dict["user_nickname"] = user_obj.nickname
     interaction_obj = Interaction(**interaction_dict)
     
     interaction_data = prepare_for_mongo(interaction_obj.dict())
