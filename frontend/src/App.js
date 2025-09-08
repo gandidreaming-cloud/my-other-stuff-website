@@ -627,9 +627,9 @@ function App() {
                 </CardTitle>
               </CardHeader>
               <CardContent className="text-sm text-black space-y-2">
-                <p>Tokens remaining: <span className="font-bold">{currentUser.tokens_remaining}</span></p>
-                <p>Member since: {new Date(currentUser.created_at).toLocaleDateString()}</p>
-                <p>Boring level: <span className="font-bold">Maximum</span></p>
+                <p>tokens remaining: <span className="font-bold">{currentUser.tokens_remaining}</span></p>
+                <p>member since: {new Date(currentUser.created_at).toLocaleDateString()}</p>
+                <p>boring level: <span className="font-bold">maximum</span></p>
               </CardContent>
             </Card>
           </div>
