@@ -158,6 +158,7 @@ function App() {
     
     // Check if user is blocked (from localStorage)
     const blockUntil = localStorage.getItem('boringBlockUntil');
+    const savedBlockMessage = localStorage.getItem('boringBlockMessage');
     if (blockUntil) {
       const blockTime = new Date(blockUntil);
       const now = new Date();
@@ -165,6 +166,7 @@ function App() {
         const remaining = Math.ceil((blockTime - now) / 1000);
         setIsBlocked(true);
         setBlockTimeRemaining(remaining);
+        setBlockMessage(savedBlockMessage || blockMessages[0]);
         setShowOnboarding(false);
         
         // Start countdown timer
@@ -173,8 +175,10 @@ function App() {
           if (currentTime >= blockTime) {
             setIsBlocked(false);
             setBlockTimeRemaining(0);
+            setBlockMessage("");
             setShowOnboarding(true);
             localStorage.removeItem('boringBlockUntil');
+            localStorage.removeItem('boringBlockMessage');
             clearInterval(timer);
           } else {
             const remaining = Math.ceil((blockTime - currentTime) / 1000);
@@ -185,6 +189,7 @@ function App() {
         return () => clearInterval(timer);
       } else {
         localStorage.removeItem('boringBlockUntil');
+        localStorage.removeItem('boringBlockMessage');
       }
     }
   }, []);
