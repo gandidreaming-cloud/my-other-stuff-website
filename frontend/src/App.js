@@ -450,7 +450,7 @@ function App() {
                   size="sm"
                   className="border-black text-black hover:bg-black hover:text-white"
                 >
-                  Admin Panel
+                  admin panel
                 </Button>
               )}
               
