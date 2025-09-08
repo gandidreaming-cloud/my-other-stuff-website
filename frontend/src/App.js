@@ -550,6 +550,52 @@ function App() {
     );
   }
 
+  // Registration Success Screen
+  if (registrationSuccess && !currentUser) {
+    return (
+      <div className="min-h-screen bg-white flex items-center justify-center p-4">
+        <Toaster />
+        <div className="w-full max-w-lg text-center">
+          <div className="mb-8">
+            <h1 className="text-6xl font-light text-black mb-2">boooring</h1>
+            <p className="text-xl text-black mb-6">ordinary is extraordinary</p>
+          </div>
+          
+          <div className="space-y-6">
+            <div className="bg-white border-2 border-black rounded-lg p-6">
+              <h2 className="text-2xl text-black mb-4">✅ registration successful!</h2>
+              
+              <p className="text-black mb-4">your magic word is:</p>
+              
+              <div className="flex items-center gap-3 mb-6">
+                <div className="flex-1 bg-gray-50 border-2 border-black rounded p-3 font-mono text-lg text-black break-all">
+                  {magicWord}
+                </div>
+                <Button
+                  onClick={() => copyToClipboard(magicWord)}
+                  className="bg-white text-black border-2 border-black hover:bg-black hover:text-white"
+                >
+                  📋 copy
+                </Button>
+              </div>
+              
+              <p className="text-sm text-black mb-6">
+                💾 save this word to log in later
+              </p>
+              
+              <Button
+                onClick={handleContinueToBoring}
+                className="w-full bg-black text-white hover:bg-gray-800"
+              >
+                continue to boooring
+              </Button>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
   // Registration Screen
   if (showRegistration && !currentUser) {
     return (
@@ -564,11 +610,11 @@ function App() {
           <div className="w-full max-w-lg">
             <form onSubmit={handleRegistration} className="space-y-3">
               <div className="flex items-center gap-6">
-                <Label htmlFor="name" className="text-black font-medium w-32 text-right">nickname:</Label>
+                <Label htmlFor="nickname" className="text-black font-medium w-32 text-right">nickname:</Label>
                 <Input
-                  id="name"
-                  value={regForm.name}
-                  onChange={(e) => setRegForm({...regForm, name: e.target.value})}
+                  id="nickname"
+                  value={regForm.nickname}
+                  onChange={(e) => setRegForm({...regForm, nickname: e.target.value})}
                   className="flex-1 border-black focus:border-black focus:ring-black"
                   required
                 />
@@ -595,6 +641,77 @@ function App() {
                 </Button>
               </div>
             </form>
+            
+            <div className="text-center mt-4">
+              <Button
+                onClick={() => {setShowRegistration(false); setShowLogin(true);}}
+                variant="ghost"
+                className="text-black hover:bg-black hover:text-white"
+              >
+                already have account? login
+              </Button>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  // Login Screen
+  if (showLogin && !currentUser) {
+    return (
+      <div className="min-h-screen bg-white flex items-center justify-center p-4">
+        <Toaster />
+        <div className="w-full max-w-md">
+          <div className="text-center mb-8">
+            <h1 className="text-6xl font-light text-black mb-2">boooring</h1>
+            <p className="text-xl text-black mb-6">ordinary is extraordinary</p>
+          </div>
+          
+          <div className="w-full max-w-lg">
+            <form onSubmit={handleLogin} className="space-y-3">
+              <div className="flex items-center gap-6">
+                <Label htmlFor="login-nickname" className="text-black font-medium w-32 text-right">nickname:</Label>
+                <Input
+                  id="login-nickname"
+                  value={loginForm.nickname}
+                  onChange={(e) => setLoginForm({...loginForm, nickname: e.target.value})}
+                  className="flex-1 border-black focus:border-black focus:ring-black"
+                  required
+                />
+              </div>
+              
+              <div className="flex items-center gap-6">
+                <Label htmlFor="magic-word" className="text-black font-medium w-32 text-right">magic word:</Label>
+                <Input
+                  id="magic-word"
+                  value={loginForm.magic_word}
+                  onChange={(e) => setLoginForm({...loginForm, magic_word: e.target.value})}
+                  className="flex-1 border-black focus:border-black focus:ring-black font-mono"
+                  placeholder="rrriiinnngggooobbbo"
+                  required
+                />
+              </div>
+              
+              <div className="flex justify-center pt-6">
+                <Button 
+                  type="submit"
+                  className="px-12 bg-white text-black border-2 border-black hover:bg-black hover:text-white"
+                >
+                  login
+                </Button>
+              </div>
+            </form>
+            
+            <div className="text-center mt-4">
+              <Button
+                onClick={() => {setShowLogin(false); setShowRegistration(true);}}
+                variant="ghost"
+                className="text-black hover:bg-black hover:text-white"
+              >
+                need account? register
+              </Button>
+            </div>
           </div>
         </div>
       </div>
