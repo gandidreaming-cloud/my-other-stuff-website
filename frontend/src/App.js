@@ -271,61 +271,64 @@ function App() {
             <p className="text-xl text-black">ordinary is extraordinary</p>
           </div>
           
-          <div className="space-y-6">
-            <form onSubmit={handleRegistration} className="space-y-6">
-              <div>
-                <Label htmlFor="name" className="text-black font-medium">name</Label>
+          <div className="w-full max-w-lg">
+            <form onSubmit={handleRegistration} className="space-y-3">
+              <div className="flex items-center gap-6">
+                <Label htmlFor="name" className="text-black font-medium w-32 text-right">Name:</Label>
                 <Input
                   id="name"
                   value={regForm.name}
                   onChange={(e) => setRegForm({...regForm, name: e.target.value})}
-                  className="mt-1 border-black focus:border-black focus:ring-black"
+                  className="flex-1 border-black focus:border-black focus:ring-black"
                   required
                 />
               </div>
               
-              <div>
-                <Label htmlFor="email" className="text-black font-medium">email</Label>
+              <div className="flex items-center gap-6">
+                <Label htmlFor="email" className="text-black font-medium w-32 text-right">Email:</Label>
                 <Input
                   id="email"
                   type="email"
                   value={regForm.email}
                   onChange={(e) => setRegForm({...regForm, email: e.target.value})}
-                  className="mt-1 border-black focus:border-black focus:ring-black"
+                  className="flex-1 border-black focus:border-black focus:ring-black"
                   required
                 />
               </div>
               
-              <div>
-                <Label htmlFor="password" className="text-black font-medium">password</Label>
+              <div className="flex items-center gap-6">
+                <Label htmlFor="password" className="text-black font-medium w-32 text-right">Password:</Label>
                 <Input
                   id="password"
                   type="password"
                   value={regForm.password}
                   onChange={(e) => setRegForm({...regForm, password: e.target.value})}
-                  className="mt-1 border-black focus:border-black focus:ring-black"
+                  className="flex-1 border-black focus:border-black focus:ring-black"
                   required
                 />
               </div>
               
-              <div>
-                <Label htmlFor="boring-answer" className="text-black font-medium">are you boring enough?</Label>
+              <div className="flex items-start gap-6 pt-2">
+                <Label htmlFor="boring-answer" className="text-black font-medium w-32 text-right pt-2">Are you boring enough:</Label>
                 <Textarea
                   id="boring-answer"
                   value={regForm.boring_answer}
                   onChange={(e) => setRegForm({...regForm, boring_answer: e.target.value})}
                   placeholder="tell us why you're perfectly, wonderfully boring..."
-                  className="mt-1 border-black focus:border-black focus:ring-black"
+                  className="flex-1 border-black focus:border-black focus:ring-black resize-none"
+                  rows={3}
                   required
                 />
               </div>
               
-              <Button 
-                type="submit"
-                className="w-full bg-white text-black border-2 border-black hover:bg-black hover:text-white"
-              >
-                registrate
-              </Button>
+              <div className="flex justify-center pt-6">
+                <Button 
+                  type="submit"
+                  className="px-12 bg-white text-black border-2 border-black hover:bg-black hover:text-white"
+                >
+                  registrate
+                </Button>
+              </div>
             </form>
           </div>
         </div>
