@@ -390,19 +390,19 @@ function App() {
       <div className="max-w-4xl mx-auto p-6">
         {/* Today's Winner */}
         {todayWinner ? (
-          <Card className="mb-8 border-2 border-amber-300 bg-gradient-to-r from-amber-50 to-yellow-50">
+          <Card className="mb-8 border-2 border-black bg-white">
             <CardHeader>
               <div className="flex items-center gap-2">
-                <Trophy className="w-6 h-6 text-amber-600" />
-                <CardTitle className="text-amber-900">Today's Boring Winner</CardTitle>
-                <Badge className="bg-amber-200 text-amber-800">
+                <Trophy className="w-6 h-6 text-black" />
+                <CardTitle className="text-black">Today's Boring Winner</CardTitle>
+                <Badge className="bg-black text-white">
                   {new Date(todayWinner.created_at).toLocaleDateString()}
                 </Badge>
               </div>
             </CardHeader>
             <CardContent className="space-y-4">
-              <div className="bg-white/60 rounded-lg p-4">
-                <p className="text-lg leading-relaxed text-gray-800 mb-4">
+              <div className="bg-white border border-black rounded-lg p-4">
+                <p className="text-lg leading-relaxed text-black mb-4">
                   {todayWinner.text_content}
                 </p>
                 
@@ -412,7 +412,7 @@ function App() {
                       href={todayWinner.instagram_link} 
                       target="_blank" 
                       rel="noopener noreferrer"
-                      className="text-pink-600 hover:text-pink-800 font-medium"
+                      className="text-black hover:underline font-medium"
                     >
                       📸 Instagram
                     </a>
@@ -422,14 +422,14 @@ function App() {
                       href={todayWinner.tiktok_link} 
                       target="_blank" 
                       rel="noopener noreferrer"
-                      className="text-black hover:text-gray-800 font-medium"
+                      className="text-black hover:underline font-medium"
                     >
                       🎵 TikTok
                     </a>
                   )}
                 </div>
                 
-                <div className="text-sm text-gray-600 mb-4">
+                <div className="text-sm text-black mb-4">
                   By <span className="font-medium">{todayWinner.user_name}</span>
                 </div>
               </div>
