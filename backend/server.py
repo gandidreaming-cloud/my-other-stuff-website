@@ -109,11 +109,7 @@ def prepare_for_mongo(data):
 def parse_from_mongo(item):
     if isinstance(item.get('created_at'), str):
         item['created_at'] = datetime.fromisoformat(item['created_at'])
-    if isinstance(item.get('winner_date'), str) and item['winner_date']:
-        try:
-            item['winner_date'] = datetime.fromisoformat(item['winner_date'])
-        except:
-            pass
+    # Keep winner_date as string - don't convert to datetime
     return item
 
 # Auth helper (simple check for admin)
