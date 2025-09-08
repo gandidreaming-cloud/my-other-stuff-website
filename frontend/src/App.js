@@ -573,8 +573,8 @@ function App() {
             <Card className="mb-8 text-center py-12 border-black">
               <CardContent>
                 <Clock className="w-12 h-12 text-black mx-auto mb-4" />
-                <h2 className="text-2xl font-light text-black mb-2">No Winner Yet Today</h2>
-                <p className="text-black">The daily lottery runs at 4PM Berlin time</p>
+                <h2 className="text-2xl font-light text-black mb-2">no winner yet today</h2>
+                <p className="text-black">the daily lottery runs at 4pm berlin time</p>
                 {currentUser.is_admin && (
                   <Button 
                     onClick={runLottery} 
