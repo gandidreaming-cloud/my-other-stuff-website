@@ -440,18 +440,18 @@ function App() {
                   variant="ghost" 
                   size="sm" 
                   onClick={handleLike}
-                  className={`flex items-center gap-2 ${userLikes.has(todayWinner.id) ? 'text-red-600' : 'text-gray-600'}`}
+                  className={`flex items-center gap-2 hover:bg-black hover:text-white ${userLikes.has(todayWinner.id) ? 'text-black' : 'text-black'}`}
                 >
                   <Heart className={`w-4 h-4 ${userLikes.has(todayWinner.id) ? 'fill-current' : ''}`} />
                   {todayWinner.likes_count}
                 </Button>
                 
-                <Button variant="ghost" size="sm" className="flex items-center gap-2 text-gray-600">
+                <Button variant="ghost" size="sm" className="flex items-center gap-2 text-black hover:bg-black hover:text-white">
                   <MessageCircle className="w-4 h-4" />
                   {todayWinner.comments_count}
                 </Button>
                 
-                <Button variant="ghost" size="sm" className="flex items-center gap-2 text-gray-600">
+                <Button variant="ghost" size="sm" className="flex items-center gap-2 text-black hover:bg-black hover:text-white">
                   <Share2 className="w-4 h-4" />
                   Share
                 </Button>
@@ -464,18 +464,24 @@ function App() {
                     value={commentText}
                     onChange={(e) => setCommentText(e.target.value)}
                     placeholder="Add a supportive comment..."
-                    className="flex-1"
+                    className="flex-1 border-black focus:border-black focus:ring-black"
                   />
-                  <Button type="submit" size="sm">Comment</Button>
+                  <Button 
+                    type="submit" 
+                    size="sm"
+                    className="bg-white text-black border-2 border-black hover:bg-black hover:text-white"
+                  >
+                    Comment
+                  </Button>
                 </form>
                 
                 <div className="space-y-2">
                   {interactions
                     .filter(int => int.type === "comment")
                     .map(comment => (
-                      <div key={comment.id} className="bg-white/60 rounded p-3">
-                        <div className="font-medium text-sm text-amber-800">{comment.user_name}</div>
-                        <div className="text-gray-700">{comment.content}</div>
+                      <div key={comment.id} className="bg-white border border-black rounded p-3">
+                        <div className="font-medium text-sm text-black">{comment.user_name}</div>
+                        <div className="text-black">{comment.content}</div>
                       </div>
                     ))}
                 </div>
