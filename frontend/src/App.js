@@ -873,7 +873,7 @@ function App() {
                       .filter(int => int.type === "comment")
                       .map(comment => (
                         <div key={comment.id} className="bg-white border border-black rounded p-3">
-                          <div className="font-medium text-sm text-black">{comment.user_name}</div>
+                          <div className="font-medium text-sm text-black">{comment.user_nickname}</div>
                           <div className="text-black">{comment.content}</div>
                         </div>
                       ))}
