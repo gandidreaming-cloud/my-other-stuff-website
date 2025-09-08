@@ -416,7 +416,7 @@ function App() {
         <header className="bg-white border-b border-black sticky top-0 z-50">
           <div className="max-w-6xl mx-auto px-4 py-4 flex justify-between items-center">
             <div className="flex items-center gap-3">
-              <h1 className="text-3xl font-light text-black">boring</h1>
+              <h1 className="text-3xl font-light text-black">boooring</h1>
               <Badge variant="outline" className="bg-white text-black border-black">
                 <Clock className="w-3 h-3 mr-1" />
                 Daily Winner at 4PM Berlin
