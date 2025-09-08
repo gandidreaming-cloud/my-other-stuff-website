@@ -823,7 +823,7 @@ function App() {
                   </div>
                   
                   <div className="text-sm text-black mb-4">
-                    by <span className="font-medium">{todayWinner.user_name}</span>
+                    by <span className="font-medium">{todayWinner.user_nickname}</span>
                   </div>
                 </div>
                 
