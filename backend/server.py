@@ -377,6 +377,19 @@ async def create_interaction(submission_id: str, interaction: InteractionCreate,
 @api_router.get("/submissions/{submission_id}/interactions", response_model=List[Interaction])
 async def get_interactions(submission_id: str):
     interactions = await db.interactions.find({"submission_id": submission_id}).sort("created_at", 1).to_list(1000)
+    
+    # Handle legacy data
+    for interaction in interactions:
+        if "user_nickname" not in interaction and "user_name" in interaction:
+            interaction["user_nickname"] = interaction["user_name"]
+        elif "user_nickname" not in interaction:
+            # Get nickname from user data
+            user_data = await db.users.find_one({"id": interaction["user_id"]})
+            if user_data:
+                interaction["user_nickname"] = user_data.get("nickname", user_data.get("name", "unknown"))
+            else:
+                interaction["user_nickname"] = "unknown"
+    
     return [Interaction(**parse_from_mongo(interaction)) for interaction in interactions]
 
 # Admin routes
