@@ -309,10 +309,8 @@ async def get_today_winner():
 
 @api_router.post("/run-lottery")
 async def run_daily_lottery(admin_user_id: str):
-    # Check if user is admin
-    admin_data = await db.users.find_one({"id": admin_user_id})
-    if not admin_data or not admin_data.get("is_admin", False):
-        raise HTTPException(status_code=403, detail="Admin access required")
+    # Strict owner-only check
+    await verify_owner_admin(admin_user_id)
     
     today = datetime.now(timezone.utc).date().isoformat()
     
