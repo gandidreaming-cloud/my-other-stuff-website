@@ -339,9 +339,9 @@ function App() {
       <div className="min-h-screen bg-white flex items-center justify-center p-4">
         <Toaster />
         <div className="w-full max-w-lg text-center">
-          <div className="mb-12">
-            <h1 className="text-6xl font-light text-black mb-4">boring</h1>
-            <p className="text-xl text-black mb-8">ordinary is extraordinary</p>
+          <div className="mb-8">
+            <h1 className="text-6xl font-light text-black mb-2">boooring</h1>
+            <p className="text-xl text-black mb-6">ordinary is extraordinary</p>
           </div>
           
           <div className="space-y-6">
