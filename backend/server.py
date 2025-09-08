@@ -120,7 +120,7 @@ async def get_current_user(user_id: str):
 # Routes
 @api_router.get("/")
 async def root():
-    return {"message": "Welcome to Boring - where ordinary is extraordinary!"}
+    return {"message": "Welcome to Boooring - where ordinary is extraordinary!"}
 
 # User routes
 @api_router.post("/users", response_model=User)
