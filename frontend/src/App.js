@@ -305,26 +305,26 @@ function App() {
       <div className="min-h-screen bg-white flex items-center justify-center p-4">
         <Toaster />
         <div className="w-full max-w-md text-center">
-          <div className="mb-8">
+          <div className="mb-10">
             <h1 className="text-6xl font-light text-black mb-2">boooring</h1>
-            <p className="text-xl text-black mb-6">ordinary is extraordinary</p>
+            <p className="text-xl text-black">ordinary is extraordinary</p>
           </div>
           
           <div className="space-y-4">
-            <h2 className="text-2xl text-black mb-2">Are you boring?</h2>
+            <h2 className="text-2xl text-black mb-2">are you boring?</h2>
             
             <div className="flex justify-center gap-6">
               <Button 
                 onClick={() => handleBoringAnswer(true)}
                 className="px-6 py-2 bg-white text-black border-2 border-black hover:bg-black hover:text-white"
               >
-                Yes
+                yes
               </Button>
               <Button 
                 onClick={() => handleBoringAnswer(false)}
                 className="px-6 py-2 bg-white text-black border-2 border-black hover:bg-black hover:text-white"
               >
-                No
+                no
               </Button>
             </div>
           </div>
