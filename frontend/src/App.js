@@ -178,6 +178,18 @@ function App() {
     const secs = seconds % 60;
     return `${minutes}:${secs.toString().padStart(2, '0')}`;
   };
+
+  const handleRegistration = async (e) => {
+    e.preventDefault();
+    try {
+      const response = await axios.post(`${API}/users`, regForm);
+      setCurrentUser(response.data);
+      setShowRegistration(false);
+      toast.success("Welcome to Boring! You have 3 free tokens to start.");
+    } catch (error) {
+      toast.error(error.response?.data?.detail || "Registration failed");
+    }
+  };
     e.preventDefault();
     try {
       const response = await axios.post(`${API}/users`, regForm);
