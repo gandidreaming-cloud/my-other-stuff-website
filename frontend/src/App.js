@@ -430,7 +430,7 @@ function App() {
           <div className="space-y-4">
             <h2 className="text-2xl text-black mb-2">are you boring?</h2>
             
-            <div className="flex justify-center gap-6">
+            <div className="flex justify-center gap-3">
               <Button 
                 onClick={() => handleBoringAnswer(true)}
                 className="px-6 py-2 bg-white text-black border-2 border-black hover:bg-black hover:text-white"
