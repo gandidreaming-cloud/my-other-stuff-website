@@ -766,16 +766,7 @@ function App() {
                 </Button>
               )}
               
-              {!currentUser.is_admin && (
-                <Button 
-                  onClick={makeAdmin} 
-                  variant="ghost" 
-                  size="sm"
-                  className="text-black hover:bg-black hover:text-white"
-                >
-                  become admin
-                </Button>
-              )}
+              {/* Remove "Become Admin" button - admin access restricted to owner only */}
             </div>
           </div>
         </header>
