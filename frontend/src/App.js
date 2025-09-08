@@ -597,10 +597,10 @@ function App() {
                 </CardTitle>
               </CardHeader>
               <CardContent className="text-sm text-black space-y-2">
-                <p>• Submit your most boring moment using a token</p>
-                <p>• Admin reviews and approves submissions</p>
-                <p>• One random winner chosen daily at 4PM Berlin time</p>
-                <p>• Everyone can like, comment, and share the winner</p>
+                <p>• submit your most boring moment using a token</p>
+                <p>• admin reviews and approves submissions</p>
+                <p>• one random winner chosen daily at 4pm berlin time</p>
+                <p>• everyone can like, comment, and share the winner</p>
               </CardContent>
             </Card>
             
