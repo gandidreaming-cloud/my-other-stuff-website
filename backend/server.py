@@ -105,6 +105,26 @@ class SubmissionUpdate(BaseModel):
     status: SubmissionStatus
 
 # Helper functions
+def generate_magic_word():
+    """Generate a unique magic word from bbbooorrriiinnnggg"""
+    letters = ['b','b','b','o','o','o','r','r','r','i','i','i','n','n','n','g','g','g']
+    random.shuffle(letters)
+    return ''.join(letters)
+
+async def ensure_unique_magic_word():
+    """Ensure the generated magic word is unique in database"""
+    max_attempts = 100
+    for _ in range(max_attempts):
+        magic_word = generate_magic_word()
+        existing = await db.users.find_one({"magic_word": magic_word})
+        if not existing:
+            return magic_word
+    
+    # If we can't find unique word in 100 attempts, add random suffix
+    base_word = generate_magic_word()
+    suffix = ''.join(random.choices(string.ascii_lowercase, k=3))
+    return base_word + suffix
+
 def prepare_for_mongo(data):
     if isinstance(data, dict):
         for key, value in data.items():
