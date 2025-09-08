@@ -41,8 +41,6 @@ class User(BaseModel):
     id: str = Field(default_factory=lambda: str(uuid.uuid4()))
     name: str
     email: EmailStr
-    password: str
-    boring_answer: str
     tokens_remaining: int = 3
     is_admin: bool = False
     created_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
@@ -50,8 +48,6 @@ class User(BaseModel):
 class UserCreate(BaseModel):
     name: str
     email: EmailStr
-    password: str
-    boring_answer: str
 
 class Submission(BaseModel):
     id: str = Field(default_factory=lambda: str(uuid.uuid4()))
