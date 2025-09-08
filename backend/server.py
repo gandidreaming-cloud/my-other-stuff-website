@@ -205,6 +205,7 @@ async def get_user(user_id: str):
         raise HTTPException(status_code=404, detail="User not found")
     return User(**parse_from_mongo(user_data))
 
+# Keep this for backward compatibility if needed
 @api_router.get("/users/email/{email}", response_model=User)
 async def get_user_by_email(email: str):
     user_data = await db.users.find_one({"email": email})
