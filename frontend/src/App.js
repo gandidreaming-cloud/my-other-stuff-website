@@ -556,52 +556,58 @@ function App() {
 
       {/* Submission Dialog */}
       <Dialog open={showSubmission} onOpenChange={setShowSubmission}>
-        <DialogContent className="max-w-md">
+        <DialogContent className="max-w-md border-black">
           <DialogHeader>
-            <DialogTitle>Submit Your Boring Moment</DialogTitle>
+            <DialogTitle className="text-black">Submit Your Boring Moment</DialogTitle>
           </DialogHeader>
           <form onSubmit={handleSubmission} className="space-y-4">
             <div>
-              <Label htmlFor="text-content">Your boring story (max 1000 characters)</Label>
+              <Label htmlFor="text-content" className="text-black">Your boring story (max 1000 characters)</Label>
               <Textarea
                 id="text-content"
                 value={subForm.text_content}
                 onChange={(e) => setSubForm({...subForm, text_content: e.target.value})}
                 placeholder="I organized my pencils by color today..."
-                className="min-h-[100px]"
+                className="min-h-[100px] border-black focus:border-black focus:ring-black"
                 maxLength={1000}
                 required
               />
-              <div className="text-xs text-gray-500 mt-1">
+              <div className="text-xs text-black mt-1">
                 {subForm.text_content.length}/1000 characters
               </div>
             </div>
             
             <div>
-              <Label htmlFor="instagram">Instagram Link (optional)</Label>
+              <Label htmlFor="instagram" className="text-black">Instagram Link (optional)</Label>
               <Input
                 id="instagram"
                 value={subForm.instagram_link}
                 onChange={(e) => setSubForm({...subForm, instagram_link: e.target.value})}
                 placeholder="https://instagram.com/..."
+                className="border-black focus:border-black focus:ring-black"
               />
             </div>
             
             <div>
-              <Label htmlFor="tiktok">TikTok Link (optional)</Label>
+              <Label htmlFor="tiktok" className="text-black">TikTok Link (optional)</Label>
               <Input
                 id="tiktok"
                 value={subForm.tiktok_link}
                 onChange={(e) => setSubForm({...subForm, tiktok_link: e.target.value})}
                 placeholder="https://tiktok.com/..."
+                className="border-black focus:border-black focus:ring-black"
               />
             </div>
             
-            <div className="bg-amber-50 p-3 rounded-lg text-sm text-amber-800">
+            <div className="bg-white border border-black p-3 rounded-lg text-sm text-black">
               This will use 1 token. You have {currentUser.tokens_remaining} tokens remaining.
             </div>
             
-            <Button type="submit" className="w-full" disabled={currentUser.tokens_remaining <= 0}>
+            <Button 
+              type="submit" 
+              className="w-full bg-white text-black border-2 border-black hover:bg-black hover:text-white" 
+              disabled={currentUser.tokens_remaining <= 0}
+            >
               Submit for Daily Lottery
             </Button>
           </form>
