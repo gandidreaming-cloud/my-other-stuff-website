@@ -580,7 +580,7 @@ function App() {
                     onClick={runLottery} 
                     className="mt-4 bg-white text-black border-2 border-black hover:bg-black hover:text-white"
                   >
-                    Run Lottery Now (Admin)
+                    run lottery now (admin)
                   </Button>
                 )}
               </CardContent>
