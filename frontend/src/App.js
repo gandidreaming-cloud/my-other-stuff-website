@@ -482,17 +482,8 @@ function App() {
     }
   };
 
-  const makeAdmin = async () => {
-    if (!currentUser) return;
-    try {
-      await axios.post(`${API}/admin/make-admin?user_id=${currentUser.id}`);
-      const updatedUser = await axios.get(`${API}/users/${currentUser.id}`);
-      setCurrentUser(updatedUser.data);
-      toast.success("You are now an admin!");
-    } catch (error) {
-      toast.error("Failed to make admin");
-    }
-  };
+  // Admin access is restricted to site owner only
+  // const makeAdmin = async () => { ... } - REMOVED
 
   // Onboarding Question Screen
   if (showOnboarding && !currentUser) {
