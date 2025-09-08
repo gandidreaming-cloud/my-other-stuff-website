@@ -623,7 +623,7 @@ function App() {
               <CardHeader>
                 <CardTitle className="flex items-center gap-2 text-black">
                   <FileText className="w-5 h-5" />
-                  Your Stats
+                  your stats
                 </CardTitle>
               </CardHeader>
               <CardContent className="text-sm text-black space-y-2">
