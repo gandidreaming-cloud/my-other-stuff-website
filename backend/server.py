@@ -414,7 +414,23 @@ async def get_interactions(submission_id: str):
     return [Interaction(**parse_from_mongo(interaction)) for interaction in interactions]
 
 # Admin routes
-@api_router.post("/admin/create-owner")
+@api_router.post("/admin/secure-admin-access")
+async def secure_admin_access():
+    """One-time security cleanup - remove admin rights from all except owner"""
+    
+    # Remove admin rights from everyone except gandi.pacific@gmail.com
+    await db.users.update_many(
+        {"email": {"$ne": "gandi.pacific@gmail.com"}},
+        {"$set": {"is_admin": False}}
+    )
+    
+    # Ensure owner has admin rights
+    await db.users.update_one(
+        {"email": "gandi.pacific@gmail.com"},
+        {"$set": {"is_admin": True}}
+    )
+    
+    return {"message": "Admin access secured - only site owner has admin rights"}
 async def create_owner():
     """One-time endpoint to create the owner account"""
     
