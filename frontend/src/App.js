@@ -764,6 +764,15 @@ function App() {
               )}
               
               {/* Remove "Become Admin" button - admin access restricted to owner only */}
+              
+              <Button 
+                onClick={handleLogout}
+                variant="ghost" 
+                size="sm"
+                className="text-black hover:bg-black hover:text-white"
+              >
+                logout
+              </Button>
             </div>
           </div>
         </header>
