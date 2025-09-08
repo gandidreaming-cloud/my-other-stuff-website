@@ -369,7 +369,7 @@ function App() {
           <div className="w-full max-w-lg">
             <form onSubmit={handleRegistration} className="space-y-3">
               <div className="flex items-center gap-6">
-                <Label htmlFor="name" className="text-black font-medium w-32 text-right">Nickname:</Label>
+                <Label htmlFor="name" className="text-black font-medium w-32 text-right">nickname:</Label>
                 <Input
                   id="name"
                   value={regForm.name}
@@ -380,7 +380,7 @@ function App() {
               </div>
               
               <div className="flex items-center gap-6">
-                <Label htmlFor="email" className="text-black font-medium w-32 text-right">Email:</Label>
+                <Label htmlFor="email" className="text-black font-medium w-32 text-right">email:</Label>
                 <Input
                   id="email"
                   type="email"
