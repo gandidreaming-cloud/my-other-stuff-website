@@ -92,7 +92,7 @@ class Interaction(BaseModel):
     id: str = Field(default_factory=lambda: str(uuid.uuid4()))
     submission_id: str
     user_id: str
-    user_name: str
+    user_nickname: str
     type: InteractionType
     content: Optional[str] = None  # For comments
     created_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
