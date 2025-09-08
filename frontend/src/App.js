@@ -737,7 +737,7 @@ function App() {
             
             <div className="flex items-center gap-4">
               <div className="text-sm text-black">
-                <span className="font-medium">{currentUser.name}</span>
+                <span className="font-medium">{currentUser.nickname}</span>
                 <Badge className="ml-2 bg-black text-white">
                   {currentUser.tokens_remaining} tokens
                 </Badge>
