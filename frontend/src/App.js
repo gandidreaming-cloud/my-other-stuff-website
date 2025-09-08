@@ -648,7 +648,7 @@ function App() {
                   id="text-content"
                   value={subForm.text_content}
                   onChange={(e) => setSubForm({...subForm, text_content: e.target.value})}
-                  placeholder="I organized my pencils by color today..."
+                  placeholder="i organized my pencils by color today..."
                   className="min-h-[100px] border-black focus:border-black focus:ring-black"
                   maxLength={1000}
                   required
