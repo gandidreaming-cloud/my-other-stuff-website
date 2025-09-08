@@ -639,7 +639,7 @@ function App() {
         <Dialog open={showSubmission} onOpenChange={setShowSubmission}>
           <DialogContent className="max-w-md border-black">
             <DialogHeader>
-              <DialogTitle className="text-black">Submit Your Boring Moment</DialogTitle>
+              <DialogTitle className="text-black">submit your boring moment</DialogTitle>
             </DialogHeader>
             <form onSubmit={handleSubmission} className="space-y-4">
               <div>
