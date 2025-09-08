@@ -643,7 +643,7 @@ function App() {
             </DialogHeader>
             <form onSubmit={handleSubmission} className="space-y-4">
               <div>
-                <Label htmlFor="text-content" className="text-black">Your boring story (max 1000 characters)</Label>
+                <Label htmlFor="text-content" className="text-black">your boring story (max 1000 characters)</Label>
                 <Textarea
                   id="text-content"
                   value={subForm.text_content}
