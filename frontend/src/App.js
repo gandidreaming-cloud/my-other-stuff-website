@@ -140,7 +140,44 @@ function App() {
     }
   };
 
-  const handleRegistration = async (e) => {
+  const handleBoringAnswer = (isBoring) => {
+    if (isBoring) {
+      setShowOnboarding(false);
+      setShowRegistration(true);
+    } else {
+      // Block user for 10 minutes
+      const blockUntil = new Date();
+      blockUntil.setMinutes(blockUntil.getMinutes() + 10);
+      localStorage.setItem('boringBlockUntil', blockUntil.toISOString());
+      
+      setIsBlocked(true);
+      setBlockTimeRemaining(600); // 10 minutes in seconds
+      setShowOnboarding(false);
+      
+      // Start countdown timer
+      const timer = setInterval(() => {
+        const currentTime = new Date();
+        const blockTime = new Date(localStorage.getItem('boringBlockUntil'));
+        
+        if (currentTime >= blockTime) {
+          setIsBlocked(false);
+          setBlockTimeRemaining(0);
+          setShowOnboarding(true);
+          localStorage.removeItem('boringBlockUntil');
+          clearInterval(timer);
+        } else {
+          const remaining = Math.ceil((blockTime - currentTime) / 1000);
+          setBlockTimeRemaining(remaining);
+        }
+      }, 1000);
+    }
+  };
+
+  const formatTime = (seconds) => {
+    const minutes = Math.floor(seconds / 60);
+    const secs = seconds % 60;
+    return `${minutes}:${secs.toString().padStart(2, '0')}`;
+  };
     e.preventDefault();
     try {
       const response = await axios.post(`${API}/users`, regForm);
