@@ -612,10 +612,10 @@ function App() {
                 </CardTitle>
               </CardHeader>
               <CardContent className="text-sm text-black space-y-2">
-                <p>• Celebrate the ordinary and mundane</p>
-                <p>• No judgment, only support</p>
-                <p>• Keep it boring and wholesome</p>
-                <p>• Share your everyday moments</p>
+                <p>• celebrate the ordinary and mundane</p>
+                <p>• no judgment, only support</p>
+                <p>• keep it boring and wholesome</p>
+                <p>• share your everyday moments</p>
               </CardContent>
             </Card>
             
