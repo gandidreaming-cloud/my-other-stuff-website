@@ -475,7 +475,7 @@ function App() {
               <CardHeader>
                 <div className="flex items-center gap-2">
                   <Trophy className="w-6 h-6 text-black" />
-                  <CardTitle className="text-black">Today's Boring Winner</CardTitle>
+                  <CardTitle className="text-black">today's boring winner</CardTitle>
                   <Badge className="bg-black text-white">
                     {new Date(todayWinner.created_at).toLocaleDateString()}
                   </Badge>
