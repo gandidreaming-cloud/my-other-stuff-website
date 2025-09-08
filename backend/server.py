@@ -448,7 +448,26 @@ async def make_admin(user_id: str):
     """BLOCKED - Only owner has admin access"""
     raise HTTPException(status_code=403, detail="admin access is restricted to site owner only")
 
-@api_router.get("/admin/stats")
+@api_router.get("/admin/export-emails")
+async def export_emails(admin_user_id: str):
+    """Export all user emails - OWNER ONLY"""
+    # Strict owner-only check
+    await verify_owner_admin(admin_user_id)
+    
+    users = await db.users.find({}, {"email": 1, "nickname": 1, "created_at": 1}).to_list(1000)
+    
+    email_list = []
+    for user in users:
+        email_list.append({
+            "email": user["email"],
+            "nickname": user["nickname"], 
+            "registered": user.get("created_at", "unknown")
+        })
+    
+    return {
+        "total_users": len(email_list),
+        "emails": email_list
+    }
 async def get_admin_stats(admin_user_id: str):
     # Strict owner-only check
     await verify_owner_admin(admin_user_id)
