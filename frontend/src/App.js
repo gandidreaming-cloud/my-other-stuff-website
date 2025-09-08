@@ -26,6 +26,11 @@ function App() {
   const [interactions, setInteractions] = useState([]);
   const [adminStats, setAdminStats] = useState({});
   const [userLikes, setUserLikes] = useState(new Set());
+  
+  // Onboarding states
+  const [showOnboarding, setShowOnboarding] = useState(true);
+  const [isBlocked, setIsBlocked] = useState(false);
+  const [blockTimeRemaining, setBlockTimeRemaining] = useState(0);
 
   // Registration form
   const [regForm, setRegForm] = useState({
