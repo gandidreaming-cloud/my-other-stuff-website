@@ -544,7 +544,7 @@ function App() {
                     <Input
                       value={commentText}
                       onChange={(e) => setCommentText(e.target.value)}
-                      placeholder="Add a supportive comment..."
+                      placeholder="add a supportive comment..."
                       className="flex-1 border-black focus:border-black focus:ring-black"
                     />
                     <Button 
@@ -552,7 +552,7 @@ function App() {
                       size="sm"
                       className="bg-white text-black border-2 border-black hover:bg-black hover:text-white"
                     >
-                      Comment
+                      comment
                     </Button>
                   </form>
                   
