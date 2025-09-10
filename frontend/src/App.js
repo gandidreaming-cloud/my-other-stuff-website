@@ -485,11 +485,40 @@ function App() {
 
   const runLottery = async () => {
     try {
-      const response = await axios.post(`${API}/run-lottery?admin_user_id=${currentUser.id}`);
-      toast.success(response.data.message);
-      await fetchTodayWinner();
+      const response = await axios.get(`${API}/random-submission?admin_user_id=${currentUser.id}`);
+      setRandomSubmission(response.data);
+      setShowLotteryPreview(true);
     } catch (error) {
-      toast.error(error.response?.data?.detail || "Failed to run lottery");
+      toast.error(error.response?.data?.detail || "Failed to get random submission");
+    }
+  };
+
+  const confirmWinner = async () => {
+    if (!randomSubmission) return;
+    
+    try {
+      await axios.post(`${API}/set-winner/${randomSubmission.id}?admin_user_id=${currentUser.id}`);
+      setShowLotteryPreview(false);
+      setRandomSubmission(null);
+      await fetchTodayWinner();
+      toast.success("Winner set successfully!");
+    } catch (error) {
+      toast.error("Failed to set winner");
+    }
+  };
+
+  const rejectWinner = async () => {
+    // Get another random submission
+    await runLottery();
+  };
+
+  const clearWinner = async () => {
+    try {
+      const response = await axios.post(`${API}/clear-winner?admin_user_id=${currentUser.id}`);
+      await fetchTodayWinner();
+      toast.success(response.data.message);
+    } catch (error) {
+      toast.error("Failed to clear winner");
     }
   };
 
