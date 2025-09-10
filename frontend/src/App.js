@@ -611,7 +611,7 @@ function App() {
           
           <div className="w-full flex justify-center">
             <div className="w-72">
-              <form onSubmit={handleRegistration} className="space-y-6">
+              <form onSubmit={handleRegistration} className="space-y-3">
                 <div className="space-y-1">
                   <Label htmlFor="nickname" className="text-black font-medium text-center block">nickname</Label>
                   <Input
@@ -637,7 +637,7 @@ function App() {
                   />
                 </div>
                 
-                <div className="pt-2">
+                <div className="pt-1">
                   <Button 
                     type="submit"
                     className="w-full bg-white text-black border-2 border-black hover:bg-black hover:text-white"
