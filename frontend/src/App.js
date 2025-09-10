@@ -874,16 +874,19 @@ function App() {
             <Card className="mb-8 text-center py-12 border-black">
               <CardContent>
                 <Clock className="w-12 h-12 text-black mx-auto mb-4" />
-                <h2 className="text-2xl font-light text-black mb-2">no winner yet today</h2>
-                <p className="text-black mb-4">the daily lottery at GMT+2</p>
-                {currentUser.is_admin && (
-                  <Button 
-                    onClick={runLottery} 
-                    className="bg-white text-black border-2 border-black hover:bg-black hover:text-white"
-                  >
-                    run lottery now (admin)
-                  </Button>
-                )}
+                <h2 className="text-2xl font-light text-black mb-6">no winner yet today</h2>
+                
+                {/* Submit Button */}
+                <Button 
+                  onClick={() => setShowSubmission(true)} 
+                  disabled={currentUser.tokens_remaining <= 0}
+                  className="bg-white text-black border-2 border-black hover:bg-black hover:text-white mb-8"
+                >
+                  submit boring content
+                </Button>
+                
+                {/* Lottery info at bottom in small text */}
+                <p className="text-black text-sm opacity-60">the daily lottery at GMT+2</p>
               </CardContent>
             </Card>
           )}
