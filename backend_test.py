@@ -13,6 +13,8 @@ class BoringAppAPITester:
         self.test_user_id = None
         self.test_submission_id = None
         self.admin_user_id = None
+        self.admin_magic_word = None
+        self.test_comment_id = None
 
     def log_test(self, name, success, details=""):
         """Log test results"""
