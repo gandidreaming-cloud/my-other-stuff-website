@@ -992,7 +992,7 @@ function App() {
 
               {/* Leave a comment button */}
               <div className="text-center mb-4">
-                {!showCommentForm ? (
+                {!showCommentForm && showComments ? (
                   <Button
                     onClick={() => setShowCommentForm(true)}
                     variant="ghost"
