@@ -985,7 +985,7 @@ function App() {
                   </form>
                 )}
                 
-                <div className="space-y-2 max-w-2xl mx-auto">
+                <div className="space-y-2 max-w-2xl mx-auto comments-section">
                   {(() => {
                     const comments = interactions.filter(int => int.type === "comment");
                     // Sort comments by likes count (descending), then by creation date (ascending)
