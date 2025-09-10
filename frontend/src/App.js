@@ -722,31 +722,32 @@ function App() {
         <Toaster />
         
         {/* Header */}
-        <header className="bg-white border-b border-black sticky top-0 z-50">
-          <div className="max-w-6xl mx-auto px-4 py-4 flex justify-between items-center">
-            <div className="flex items-center gap-3">
-              <h1 className="text-3xl font-light text-black">boooring</h1>
-              <Badge variant="outline" className="bg-white text-black border-black">
-                <Clock className="w-3 h-3 mr-1" />
-                Daily Winner at 4PM Berlin
-              </Badge>
+        <header className="bg-white border-b border-black">
+          <div className="max-w-4xl mx-auto px-4 py-6">
+            {/* Site Title - Centered */}
+            <div className="text-center mb-6">
+              <h1 className="text-4xl font-light text-black mb-2">boooring</h1>
+              <p className="text-lg text-black">ordinary is extraordinary</p>
             </div>
             
-            <div className="flex items-center gap-4">
-              <div className="text-sm text-black">
-                <span className="font-medium">{currentUser.nickname}</span>
-                <Badge className="ml-2 bg-black text-white">
+            {/* User Info - Centered */}
+            <div className="text-center mb-6">
+              <div className="text-xl font-medium text-black mb-2">{currentUser.nickname}</div>
+              <div className="text-black">
+                <Badge className="bg-black text-white px-3 py-1">
                   {currentUser.tokens_remaining} tokens
                 </Badge>
                 {currentUser.is_admin && (
-                  <Badge className="ml-2 bg-black text-white">admin</Badge>
+                  <Badge className="ml-2 bg-black text-white px-3 py-1">admin</Badge>
                 )}
               </div>
-              
+            </div>
+            
+            {/* Action Buttons - Centered */}
+            <div className="text-center space-x-4">
               <Button 
                 onClick={() => setShowSubmission(true)} 
                 disabled={currentUser.tokens_remaining <= 0}
-                size="sm"
                 className="bg-white text-black border-2 border-black hover:bg-black hover:text-white"
               >
                 submit boring content
@@ -755,20 +756,16 @@ function App() {
               {currentUser.is_admin && (
                 <Button 
                   onClick={() => setShowAdmin(true)} 
-                  variant="outline" 
-                  size="sm"
+                  variant="outline"
                   className="border-black text-black hover:bg-black hover:text-white"
                 >
                   admin panel
                 </Button>
               )}
               
-              {/* Remove "Become Admin" button - admin access restricted to owner only */}
-              
               <Button 
                 onClick={handleLogout}
-                variant="ghost" 
-                size="sm"
+                variant="ghost"
                 className="text-black hover:bg-black hover:text-white"
               >
                 logout
