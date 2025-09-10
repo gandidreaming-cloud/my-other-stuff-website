@@ -671,9 +671,9 @@ function App() {
           </div>
           
           <div className="w-full max-w-lg">
-            <form onSubmit={handleLogin} className="space-y-3">
-              <div className="flex items-center gap-6">
-                <Label htmlFor="login-nickname" className="text-black font-medium w-32 text-right">nickname:</Label>
+            <form onSubmit={handleLogin} className="space-y-4">
+              <div className="flex items-center gap-3">
+                <Label htmlFor="login-nickname" className="text-black font-medium w-20 text-right">nickname</Label>
                 <Input
                   id="login-nickname"
                   value={loginForm.nickname}
@@ -683,8 +683,8 @@ function App() {
                 />
               </div>
               
-              <div className="flex items-center gap-6">
-                <Label htmlFor="magic-word" className="text-black font-medium w-32 text-right">magic word:</Label>
+              <div className="flex items-center gap-3">
+                <Label htmlFor="magic-word" className="text-black font-medium w-20 text-right">magic word</Label>
                 <Input
                   id="magic-word"
                   value={loginForm.magic_word}
@@ -695,7 +695,7 @@ function App() {
                 />
               </div>
               
-              <div className="flex justify-center pt-6">
+              <div className="flex justify-center pt-3">
                 <Button 
                   type="submit"
                   className="px-12 bg-white text-black border-2 border-black hover:bg-black hover:text-white"
@@ -705,7 +705,7 @@ function App() {
               </div>
             </form>
             
-            <div className="text-center mt-4">
+            <div className="text-center mt-8">
               <Button
                 onClick={() => {setShowLogin(false); setShowRegistration(true);}}
                 variant="ghost"
