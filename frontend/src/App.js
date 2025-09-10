@@ -798,7 +798,7 @@ function App() {
                         rel="noopener noreferrer"
                         className="text-black hover:underline font-medium"
                       >
-                        📸 instagram
+                        instagram
                       </a>
                     )}
                     {todayWinner.tiktok_link && (
@@ -808,7 +808,7 @@ function App() {
                         rel="noopener noreferrer"
                         className="text-black hover:underline font-medium"
                       >
-                        🎵 tiktok
+                        tiktok
                       </a>
                     )}
                   </div>
