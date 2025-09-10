@@ -415,6 +415,54 @@ async def get_interactions(submission_id: str):
     
     return [Interaction(**parse_from_mongo(interaction)) for interaction in interactions]
 
+@api_router.post("/comments/{comment_id}/like")
+async def toggle_comment_like(comment_id: str, user_id: str):
+    # Get user
+    user_data = await db.users.find_one({"id": user_id})
+    if not user_data:
+        raise HTTPException(status_code=404, detail="User not found")
+    
+    user_obj = User(**parse_from_mongo(user_data))
+    
+    # Check if comment exists
+    comment_data = await db.interactions.find_one({"id": comment_id, "type": "comment"})
+    if not comment_data:
+        raise HTTPException(status_code=404, detail="Comment not found")
+    
+    # Check if user already liked this comment
+    existing_like = await db.interactions.find_one({
+        "comment_id": comment_id,
+        "user_id": user_id,
+        "type": "like"
+    })
+    
+    if existing_like:
+        # Remove like
+        await db.interactions.delete_one({"id": existing_like["id"]})
+        return {"message": "Comment like removed"}
+    else:
+        # Add like
+        interaction_dict = {
+            "type": InteractionType.LIKE,
+            "comment_id": comment_id,
+            "submission_id": comment_data["submission_id"],
+            "user_id": user_id,
+            "user_nickname": user_obj.nickname
+        }
+        interaction_obj = Interaction(**interaction_dict)
+        
+        interaction_data = prepare_for_mongo(interaction_obj.dict())
+        await db.interactions.insert_one(interaction_data)
+        return {"message": "Comment liked"}
+
+@api_router.get("/comments/{comment_id}/likes-count")
+async def get_comment_likes_count(comment_id: str):
+    likes_count = await db.interactions.count_documents({
+        "comment_id": comment_id,
+        "type": "like"
+    })
+    return {"likes_count": likes_count}
+
 # Admin routes
 @api_router.post("/admin/secure-admin-access")
 async def secure_admin_access():
