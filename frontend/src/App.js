@@ -610,9 +610,9 @@ function App() {
           </div>
           
           <div className="w-full max-w-lg">
-            <form onSubmit={handleRegistration} className="space-y-3">
-              <div className="flex items-center gap-6">
-                <Label htmlFor="nickname" className="text-black font-medium w-32 text-right">nickname:</Label>
+            <form onSubmit={handleRegistration} className="space-y-4">
+              <div className="flex items-center gap-3">
+                <Label htmlFor="nickname" className="text-black font-medium w-20 text-right">nickname</Label>
                 <Input
                   id="nickname"
                   value={regForm.nickname}
@@ -622,8 +622,8 @@ function App() {
                 />
               </div>
               
-              <div className="flex items-center gap-6">
-                <Label htmlFor="email" className="text-black font-medium w-32 text-right">email:</Label>
+              <div className="flex items-center gap-3">
+                <Label htmlFor="email" className="text-black font-medium w-20 text-right">email</Label>
                 <Input
                   id="email"
                   type="email"
@@ -634,7 +634,7 @@ function App() {
                 />
               </div>
               
-              <div className="flex justify-center pt-6">
+              <div className="flex justify-center pt-3">
                 <Button 
                   type="submit"
                   className="px-12 bg-white text-black border-2 border-black hover:bg-black hover:text-white"
@@ -644,7 +644,7 @@ function App() {
               </div>
             </form>
             
-            <div className="text-center mt-4">
+            <div className="text-center mt-8">
               <Button
                 onClick={() => {setShowRegistration(false); setShowLogin(true);}}
                 variant="ghost"
