@@ -859,7 +859,7 @@ function App() {
                     <Input
                       value={commentText}
                       onChange={(e) => setCommentText(e.target.value)}
-                      placeholder="add a supportive comment..."
+                      placeholder="your boring comment"
                       className="max-w-md border-black focus:border-black focus:ring-black"
                     />
                     <Button 
