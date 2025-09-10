@@ -257,6 +257,7 @@ function App() {
   const fetchInteractions = async (submissionId) => {
     try {
       const response = await axios.get(`${API}/submissions/${submissionId}/interactions`);
+      console.log("Fetched interactions:", response.data); // Debug log
       setInteractions(response.data);
       
       // Track user likes
