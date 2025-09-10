@@ -1083,15 +1083,15 @@ function App() {
                 <div className="space-y-4">
                   <Card className="border-black">
                     <CardContent className="pt-4">
-                      <h3 className="font-medium mb-2 text-black">Daily Lottery</h3>
+                      <h3 className="font-medium mb-2 text-black">daily lottery</h3>
                       <p className="text-sm text-black mb-4">
-                        Manually trigger the daily winner selection
+                        manually trigger the daily winner selection
                       </p>
                       <Button 
                         onClick={runLottery}
                         className="bg-white text-black border-2 border-black hover:bg-black hover:text-white"
                       >
-                        Run Lottery Now
+                        run lottery now
                       </Button>
                     </CardContent>
                   </Card>
