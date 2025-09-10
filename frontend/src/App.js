@@ -876,12 +876,13 @@ function App() {
               {/* Comments Section */}
               <div className="space-y-4">
                 <form onSubmit={handleComment} className="flex gap-2 justify-center">
-                  <Input
+                  <Textarea
                     value={commentText}
                     onChange={(e) => setCommentText(e.target.value)}
                     placeholder="your boring comment"
-                    className="max-w-md border-black focus:border-black focus:ring-black"
+                    className="max-w-md border-black focus:border-black focus:ring-black resize-none"
                     maxLength={300}
+                    rows={2}
                   />
                   <Button 
                     type="submit" 
