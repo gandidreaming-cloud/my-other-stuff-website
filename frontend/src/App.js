@@ -834,9 +834,16 @@ function App() {
                     onClick={() => setShowSubmission(true)}
                     variant="ghost"
                     size="sm"
-                    className="text-black hover:bg-black hover:text-white text-xs px-3 py-2 leading-tight border border-transparent hover:border-black"
+                    className="text-black hover:bg-black hover:text-white text-xs leading-tight bg-transparent hover:px-1 transition-all duration-200"
+                    style={{
+                      padding: '0',
+                      lineHeight: '1.2',
+                      background: 'transparent',
+                    }}
                   >
-                    tell your<br/>boring story<br/>for tomorrow
+                    <span className="hover:bg-black hover:text-white hover:px-1 transition-all duration-200">
+                      tell your<br/>boring story<br/>for tomorrow
+                    </span>
                   </Button>
                 </div>
                 {currentUser.is_admin && (
