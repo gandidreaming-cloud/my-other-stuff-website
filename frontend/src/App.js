@@ -865,23 +865,23 @@ function App() {
                 </p>
               </div>
               {/* Interaction Buttons */}
-              <div className="flex justify-center gap-1 items-center mb-2">
+              <div className="flex justify-center gap-0 items-center mb-1">
                 <Button 
                   variant="ghost" 
                   size="sm" 
                   onClick={handleLike}
-                  className={`flex items-center gap-1 hover:bg-black hover:text-white px-2 py-1 ${userLikes.has(todayWinner.id) ? 'text-black' : 'text-black'}`}
+                  className={`flex items-center gap-1 hover:bg-black hover:text-white px-1 py-1 ${userLikes.has(todayWinner.id) ? 'text-black' : 'text-black'}`}
                 >
                   <Heart className={`w-4 h-4 ${userLikes.has(todayWinner.id) ? 'fill-current' : ''}`} />
                   {todayWinner.likes_count}
                 </Button>
                 
-                <Button variant="ghost" size="sm" className="flex items-center gap-1 text-black hover:bg-black hover:text-white px-2 py-1">
+                <Button variant="ghost" size="sm" className="flex items-center gap-1 text-black hover:bg-black hover:text-white px-1 py-1">
                   <MessageCircle className="w-4 h-4" />
                   {todayWinner.comments_count}
                 </Button>
                 
-                <Button variant="ghost" size="sm" className="text-black hover:bg-black hover:text-white px-2 py-1">
+                <Button variant="ghost" size="sm" className="text-black hover:bg-black hover:text-white px-1 py-1">
                   <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="text-black">
                     <line x1="22" y1="2" x2="11" y2="13"></line>
                     <polygon points="22,2 15,22 11,13 2,9"></polygon>
@@ -890,7 +890,7 @@ function App() {
               </div>
 
               {/* Leave a comment button */}
-              <div className="text-center mb-3">
+              <div className="text-center mb-4">
                 {!showCommentForm ? (
                   <Button
                     onClick={() => setShowCommentForm(true)}
