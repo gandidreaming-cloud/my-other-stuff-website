@@ -854,25 +854,38 @@ function App() {
                 </p>
               </div>
               {/* Interaction Buttons */}
-              <div className="flex justify-center gap-4 items-center mb-6">
+              <div className="flex justify-center gap-1 items-center mb-3">
                 <Button 
                   variant="ghost" 
                   size="sm" 
                   onClick={handleLike}
-                  className={`flex items-center gap-2 hover:bg-black hover:text-white ${userLikes.has(todayWinner.id) ? 'text-black' : 'text-black'}`}
+                  className={`flex items-center gap-1 hover:bg-black hover:text-white px-2 py-1 ${userLikes.has(todayWinner.id) ? 'text-black' : 'text-black'}`}
                 >
                   <Heart className={`w-4 h-4 ${userLikes.has(todayWinner.id) ? 'fill-current' : ''}`} />
                   {todayWinner.likes_count}
                 </Button>
                 
-                <Button variant="ghost" size="sm" className="flex items-center gap-2 text-black hover:bg-black hover:text-white">
+                <Button variant="ghost" size="sm" className="flex items-center gap-1 text-black hover:bg-black hover:text-white px-2 py-1">
                   <MessageCircle className="w-4 h-4" />
                   {todayWinner.comments_count}
                 </Button>
                 
-                <Button variant="ghost" size="sm" className="text-black hover:bg-black hover:text-white">
+                <Button variant="ghost" size="sm" className="text-black hover:bg-black hover:text-white px-2 py-1">
                   share
                 </Button>
+
+                <span className="text-black mx-2">|</span>
+
+                {!showCommentForm ? (
+                  <Button
+                    onClick={() => setShowCommentForm(true)}
+                    variant="ghost"
+                    size="sm"
+                    className="text-black hover:bg-black hover:text-white px-2 py-1"
+                  >
+                    leave a comment
+                  </Button>
+                ) : null}
               </div>
               
               {/* Comments Section */}
