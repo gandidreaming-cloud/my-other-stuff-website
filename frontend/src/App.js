@@ -28,6 +28,7 @@ function App() {
   const [userLikes, setUserLikes] = useState(new Set());
   const [showAllComments, setShowAllComments] = useState(false);
   const [commentLikes, setCommentLikes] = useState(new Map());
+  const [showCommentForm, setShowCommentForm] = useState(false);
   
   // Onboarding states
   const [showOnboarding, setShowOnboarding] = useState(true);
