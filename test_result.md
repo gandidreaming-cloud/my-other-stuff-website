@@ -228,3 +228,5 @@ test_plan:
 agent_communication:
     - agent: "testing"
     - message: "Starting comprehensive testing of updated Boring app frontend focusing on page 3 design changes. Will test onboarding flow, login as admin, verify winner display structure, comment functionality, and all specified design elements."
+    - agent: "testing"
+    - message: "BACKEND TESTING COMPLETED: Fixed critical bug in interactions API that was preventing comment data from loading. The GET /api/submissions/{submission_id}/interactions endpoint was returning 500 errors due to MongoDB ObjectId serialization issue. After fixing parse_from_mongo() function, verified that exactly 5 comments exist in database and all are properly formatted with required fields. Comments functionality is now fully operational."
