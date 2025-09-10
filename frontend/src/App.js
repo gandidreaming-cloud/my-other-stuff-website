@@ -498,6 +498,23 @@ function App() {
     toast.success("logged out successfully");
   };
 
+  const handleCommentLike = async (commentId) => {
+    if (!currentUser) {
+      toast.error("Please login to like comments");
+      return;
+    }
+
+    try {
+      await axios.post(`${API}/comments/${commentId}/like?user_id=${currentUser.id}`);
+      
+      // Refresh interactions to get updated like counts
+      await fetchInteractions(todayWinner.id);
+      toast.success("Comment like updated!");
+    } catch (error) {
+      toast.error("Failed to like comment");
+    }
+  };
+
   // Onboarding Question Screen
   if (showOnboarding && !currentUser) {
     return (
