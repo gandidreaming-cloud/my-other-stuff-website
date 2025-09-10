@@ -795,12 +795,12 @@ function App() {
               <div className="text-left relative">
                 <div className="group cursor-pointer">
                   <div className="text-xl font-medium text-black">{currentUser.nickname}</div>
-                  <div className="text-sm text-black">{currentUser.tokens_remaining} tokens</div>
+                  <div className="text-sm text-black">tokens: {currentUser.tokens_remaining}</div>
                   <Button 
                     onClick={handleLogout}
                     variant="ghost"
                     size="sm"
-                    className="absolute left-0 top-0 opacity-0 group-hover:opacity-100 transition-opacity duration-200 text-black hover:bg-black hover:text-white text-xs -ml-16 mt-1 whitespace-nowrap"
+                    className="absolute left-full top-0 ml-2 opacity-0 group-hover:opacity-100 transition-opacity duration-200 text-black hover:bg-black hover:text-white text-xs whitespace-nowrap"
                   >
                     logout
                   </Button>
