@@ -177,8 +177,8 @@ class BoringAppAPITester:
 
     def test_content_submission(self):
         """Test content submission"""
-        if not self.test_user_id:
-            return self.log_test("Content Submission", False, "No test user created")
+        if not self.admin_user_id:
+            return self.log_test("Content Submission", False, "No admin user created")
         
         submission_data = {
             "text_content": "Today I watched paint dry for exactly 47 minutes. It was beige paint on a white wall. Very thrilling.",
@@ -192,7 +192,7 @@ class BoringAppAPITester:
             "submissions", 
             200, 
             submission_data,
-            params={"user_id": self.test_user_id}
+            params={"user_id": self.admin_user_id}
         )
         
         if success and response:
