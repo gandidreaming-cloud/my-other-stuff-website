@@ -458,6 +458,7 @@ function App() {
       );
       
       setCommentText("");
+      setShowCommentForm(false);
       await fetchTodayWinner();
       await fetchInteractions(todayWinner.id);
       toast.success("Comment added!");
