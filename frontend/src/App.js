@@ -683,7 +683,8 @@ function App() {
                     id="login-nickname"
                     value={loginForm.nickname}
                     onChange={(e) => setLoginForm({...loginForm, nickname: e.target.value})}
-                    className="w-full bg-transparent border-0 border-b border-black focus:border-black focus:ring-0 rounded-none px-0 pb-1"
+                    className="w-full bg-transparent border border-black focus:border-black focus:ring-0 rounded px-2 py-1"
+                    style={{ borderWidth: '0.5px' }}
                     required
                   />
                 </div>
@@ -694,7 +695,8 @@ function App() {
                     id="magic-word"
                     value={loginForm.magic_word}
                     onChange={(e) => setLoginForm({...loginForm, magic_word: e.target.value})}
-                    className="w-full bg-transparent border-0 border-b border-black focus:border-black focus:ring-0 rounded-none px-0 pb-1 font-mono"
+                    className="w-full bg-transparent border border-black focus:border-black focus:ring-0 rounded px-2 py-1 font-mono"
+                    style={{ borderWidth: '0.5px' }}
                     placeholder="rrriiinnngggooobbbo"
                     required
                   />
