@@ -1006,7 +1006,7 @@ function App() {
               
               {/* Comments Section */}
               <div className="space-y-4">
-                {showCommentForm && (
+                {showCommentForm && showComments && (
                   <form onSubmit={handleComment} className="flex gap-2 justify-center">
                     <Textarea
                       value={commentText}
