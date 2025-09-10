@@ -806,7 +806,42 @@ function App() {
             <div className="mb-8">
               <div className="text-center mb-4">
                 <h2 className="text-2xl font-light text-black">today's boring winner</h2>
-                <div className="text-lg font-medium text-black mt-1">{todayWinner.user_nickname}</div>
+                <div className="flex items-center justify-center gap-2 mt-1">
+                  <span className="text-lg font-medium text-black">{todayWinner.user_nickname}</span>
+                  {(todayWinner.instagram_link || todayWinner.tiktok_link) && (
+                    <>
+                      <span className="text-black">|</span>
+                      <div className="flex items-center gap-1">
+                        {todayWinner.instagram_link && (
+                          <a 
+                            href={todayWinner.instagram_link} 
+                            target="_blank" 
+                            rel="noopener noreferrer"
+                            className="text-black hover:opacity-70"
+                          >
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" className="text-black">
+                              <rect x="2" y="2" width="20" height="20" rx="5" ry="5" stroke="currentColor" strokeWidth="2" fill="none"/>
+                              <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" stroke="currentColor" strokeWidth="2" fill="none"/>
+                              <circle cx="17.5" cy="6.5" r="1.5" fill="currentColor"/>
+                            </svg>
+                          </a>
+                        )}
+                        {todayWinner.tiktok_link && (
+                          <a 
+                            href={todayWinner.tiktok_link} 
+                            target="_blank" 
+                            rel="noopener noreferrer"
+                            className="text-black hover:opacity-70"
+                          >
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" className="text-black">
+                              <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-.88-.05A6.33 6.33 0 0 0 5 20.1a6.34 6.34 0 0 0 10.86-4.43V7a8.16 8.16 0 0 0 4.77 1.52v-3.4a4.85 4.85 0 0 1-1-.43z" fill="currentColor"/>
+                            </svg>
+                          </a>
+                        )}
+                      </div>
+                    </>
+                  )}
+                </div>
                 <div className="text-sm text-black mt-1">
                   {new Date(todayWinner.created_at).toLocaleDateString('en-GB').replace(/\//g, '.')}
                 </div>
@@ -817,37 +852,6 @@ function App() {
                 <p className="text-base leading-relaxed text-black">
                   {todayWinner.text_content}
                 </p>
-              </div>
-              
-              <div className="text-center mb-6">
-                {(todayWinner.instagram_link || todayWinner.tiktok_link) && (
-                  <div className="text-sm text-black">
-                    winner's{' '}
-                    {todayWinner.instagram_link && (
-                      <>
-                        <a 
-                          href={todayWinner.instagram_link} 
-                          target="_blank" 
-                          rel="noopener noreferrer"
-                          className="text-black hover:underline"
-                        >
-                          instagram
-                        </a>
-                        {todayWinner.tiktok_link && ' / '}
-                      </>
-                    )}
-                    {todayWinner.tiktok_link && (
-                      <a 
-                        href={todayWinner.tiktok_link} 
-                        target="_blank" 
-                        rel="noopener noreferrer"
-                        className="text-black hover:underline"
-                      >
-                        tiktok
-                      </a>
-                    )}
-                  </div>
-                )}
               </div>
               {/* Interaction Buttons */}
               <div className="flex justify-center gap-4 items-center mb-6">
