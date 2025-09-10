@@ -1124,7 +1124,7 @@ function App() {
               <p>• submit your most boring moment using a token</p>
               <p>• admin reviews and approves submissions</p>
               <p>• one random winner chosen daily at GMT+2</p>
-              <p>• everyone can like, comment, and share the winner</p>
+              <p>• everyone can comment and share the winner</p>
             </div>
           </DialogContent>
         </Dialog>
