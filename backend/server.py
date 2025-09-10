@@ -298,8 +298,13 @@ async def update_submission_status(submission_id: str, update: SubmissionUpdate,
 
 @api_router.get("/today-winner", response_model=Optional[Submission])
 async def get_today_winner():
-    today = datetime.now(timezone.utc).date().isoformat()
-    winner = await db.submissions.find_one({"is_winner": True, "winner_date": today})
+    # Find current winner (within 20 hours)
+    twenty_hours_ago = datetime.now(timezone.utc) - timedelta(hours=20)
+    winner = await db.submissions.find_one({
+        "is_winner": True, 
+        "winner_datetime": {"$gte": twenty_hours_ago.isoformat()}
+    })
+    
     if winner:
         # Handle legacy data that might not have user_nickname
         if "user_nickname" not in winner and "user_name" in winner:
