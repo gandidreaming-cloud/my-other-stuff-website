@@ -820,7 +820,7 @@ function App() {
                     onClick={() => setShowSubmission(true)}
                     variant="ghost"
                     size="sm"
-                    className="text-black hover:bg-black hover:text-white text-xs px-2 py-1 leading-tight"
+                    className="text-black hover:bg-black hover:text-white text-xs px-3 py-2 leading-tight border border-transparent hover:border-black"
                   >
                     tell your<br/>boring story<br/>for tomorrow
                   </Button>
