@@ -397,11 +397,12 @@ async def create_interaction(submission_id: str, interaction: InteractionCreate,
     
     return {"message": f"{interaction.type.value} added successfully"}
 
-@api_router.get("/submissions/{submission_id}/interactions", response_model=List[Interaction])
+@api_router.get("/submissions/{submission_id}/interactions", response_model=List[dict])
 async def get_interactions(submission_id: str):
     interactions = await db.interactions.find({"submission_id": submission_id}).sort("created_at", 1).to_list(1000)
     
-    # Handle legacy data
+    # Handle legacy data and get likes count for comments
+    result = []
     for interaction in interactions:
         if "user_nickname" not in interaction and "user_name" in interaction:
             interaction["user_nickname"] = interaction["user_name"]
@@ -412,8 +413,20 @@ async def get_interactions(submission_id: str):
                 interaction["user_nickname"] = user_data.get("nickname", user_data.get("name", "unknown"))
             else:
                 interaction["user_nickname"] = "unknown"
+        
+        interaction_obj = parse_from_mongo(interaction)
+        
+        # If it's a comment, get likes count
+        if interaction_obj.get("type") == "comment":
+            likes_count = await db.interactions.count_documents({
+                "comment_id": interaction_obj["id"],
+                "type": "like"
+            })
+            interaction_obj["likes_count"] = likes_count
+        
+        result.append(interaction_obj)
     
-    return [Interaction(**parse_from_mongo(interaction)) for interaction in interactions]
+    return result
 
 @api_router.post("/comments/{comment_id}/like")
 async def toggle_comment_like(comment_id: str, user_id: str):
