@@ -672,30 +672,30 @@ function App() {
           
           <div className="w-full max-w-lg">
             <form onSubmit={handleLogin} className="space-y-4">
-              <div className="flex items-center gap-3">
+              <div className="flex items-center gap-3 justify-center">
                 <Label htmlFor="login-nickname" className="text-black font-medium w-20 text-right">nickname</Label>
                 <Input
                   id="login-nickname"
                   value={loginForm.nickname}
                   onChange={(e) => setLoginForm({...loginForm, nickname: e.target.value})}
-                  className="flex-1 border-black focus:border-black focus:ring-black"
+                  className="w-48 border-black focus:border-black focus:ring-black"
                   required
                 />
               </div>
               
-              <div className="flex items-center gap-3">
+              <div className="flex items-center gap-3 justify-center">
                 <Label htmlFor="magic-word" className="text-black font-medium w-20 text-right">magic word</Label>
                 <Input
                   id="magic-word"
                   value={loginForm.magic_word}
                   onChange={(e) => setLoginForm({...loginForm, magic_word: e.target.value})}
-                  className="flex-1 border-black focus:border-black focus:ring-black font-mono"
+                  className="w-48 border-black focus:border-black focus:ring-black font-mono"
                   placeholder="rrriiinnngggooobbbo"
                   required
                 />
               </div>
               
-              <div className="flex justify-center pt-3">
+              <div className="flex justify-center pt-1">
                 <Button 
                   type="submit"
                   className="px-12 bg-white text-black border-2 border-black hover:bg-black hover:text-white"
