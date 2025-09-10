@@ -531,32 +531,20 @@ function App() {
     toast.success("logged out successfully");
   };
 
-  const handleCommentLike = async (commentId) => {
-    if (!currentUser) {
-      toast.error("Please login to like comments");
-      return;
-    }
-
+  const handleShare = async () => {
     try {
-      const response = await axios.post(`${API}/comments/${commentId}/like?user_id=${currentUser.id}`);
-      
-      // Refresh interactions to get updated like counts
-      await fetchInteractions(todayWinner.id);
-      
-      // Update user tokens if someone got rewarded
-      const updatedUser = await axios.get(`${API}/users/${currentUser.id}`);
-      if (updatedUser.data) {
-        const sessionData = {
-          ...currentUser,
-          tokens_remaining: updatedUser.data.tokens_remaining
-        };
-        localStorage.setItem('boringUser', JSON.stringify(sessionData));
-        setCurrentUser(sessionData);
-      }
-      
-      toast.success(response.data.message || "Comment like updated!");
+      const url = window.location.href;
+      await navigator.clipboard.writeText(url);
+      toast.success("Link copied to clipboard!");
     } catch (error) {
-      toast.error("Failed to like comment");
+      // Fallback for older browsers
+      const textArea = document.createElement('textarea');
+      textArea.value = window.location.href;
+      document.body.appendChild(textArea);
+      textArea.select();
+      document.execCommand('copy');
+      document.body.removeChild(textArea);
+      toast.success("Link copied to clipboard!");
     }
   };
 
