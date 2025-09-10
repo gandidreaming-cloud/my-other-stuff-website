@@ -872,23 +872,55 @@ function App() {
               
               {/* Comments Section */}
               <div className="space-y-4">
-                <form onSubmit={handleComment} className="flex gap-2 justify-center">
-                  <Textarea
-                    value={commentText}
-                    onChange={(e) => setCommentText(e.target.value)}
-                    placeholder="your boring comment"
-                    className="max-w-md border-black focus:border-black focus:ring-black resize-none"
-                    maxLength={300}
-                    rows={2}
-                  />
-                  <Button 
-                    type="submit" 
-                    size="sm"
-                    className="bg-white text-black border-2 border-black hover:bg-black hover:text-white"
-                  >
-                    comment
-                  </Button>
-                </form>
+                {!showCommentForm ? (
+                  <div className="text-center">
+                    <Button
+                      onClick={() => setShowCommentForm(true)}
+                      variant="ghost"
+                      size="sm"
+                      className="text-black hover:bg-black hover:text-white"
+                    >
+                      leave a comment
+                    </Button>
+                  </div>
+                ) : (
+                  <form onSubmit={handleComment} className="flex gap-2 justify-center">
+                    <Textarea
+                      value={commentText}
+                      onChange={(e) => setCommentText(e.target.value)}
+                      placeholder="your boring comment"
+                      className="max-w-md border-black focus:border-black focus:ring-black resize-none min-h-[40px]"
+                      maxLength={300}
+                      rows={1}
+                      style={{ height: 'auto' }}
+                      onInput={(e) => {
+                        e.target.style.height = 'auto';
+                        e.target.style.height = e.target.scrollHeight + 'px';
+                      }}
+                    />
+                    <div className="flex flex-col gap-1">
+                      <Button 
+                        type="submit" 
+                        size="sm"
+                        className="bg-white text-black border-2 border-black hover:bg-black hover:text-white h-10"
+                      >
+                        comment
+                      </Button>
+                      <Button
+                        type="button"
+                        onClick={() => {
+                          setShowCommentForm(false);
+                          setCommentText('');
+                        }}
+                        variant="ghost"
+                        size="sm"
+                        className="text-black hover:bg-black hover:text-white text-xs h-6"
+                      >
+                        cancel
+                      </Button>
+                    </div>
+                  </form>
+                )}
                 
                 <div className="space-y-2 max-w-2xl mx-auto">
                   {(() => {
