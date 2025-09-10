@@ -95,11 +95,13 @@ class Interaction(BaseModel):
     user_nickname: str
     type: InteractionType
     content: Optional[str] = None  # For comments
+    comment_id: Optional[str] = None  # For comment likes
     created_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
 
 class InteractionCreate(BaseModel):
     type: InteractionType
     content: Optional[str] = None
+    comment_id: Optional[str] = None  # For comment likes
 
 class SubmissionUpdate(BaseModel):
     status: SubmissionStatus
