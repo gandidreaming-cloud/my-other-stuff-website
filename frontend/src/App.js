@@ -851,47 +851,46 @@ function App() {
                   </div>
                 )}
               </div>
+              {/* Interaction Buttons */}
+              <div className="flex justify-center gap-4 items-center mb-6">
+                <Button 
+                  variant="ghost" 
+                  size="sm" 
+                  onClick={handleLike}
+                  className={`flex items-center gap-2 hover:bg-black hover:text-white ${userLikes.has(todayWinner.id) ? 'text-black' : 'text-black'}`}
+                >
+                  <Heart className={`w-4 h-4 ${userLikes.has(todayWinner.id) ? 'fill-current' : ''}`} />
+                  {todayWinner.likes_count}
+                </Button>
                 
-                {/* Interaction Buttons */}
-                <div className="flex justify-center gap-4 items-center">
+                <Button variant="ghost" size="sm" className="flex items-center gap-2 text-black hover:bg-black hover:text-white">
+                  <MessageCircle className="w-4 h-4" />
+                  {todayWinner.comments_count}
+                </Button>
+                
+                <Button variant="ghost" size="sm" className="text-black hover:bg-black hover:text-white">
+                  share
+                </Button>
+              </div>
+              
+              {/* Comments Section */}
+              <div className="space-y-4">
+                <form onSubmit={handleComment} className="flex gap-2 justify-center">
+                  <Input
+                    value={commentText}
+                    onChange={(e) => setCommentText(e.target.value)}
+                    placeholder="your boring comment"
+                    className="max-w-md border-black focus:border-black focus:ring-black"
+                    maxLength={300}
+                  />
                   <Button 
-                    variant="ghost" 
-                    size="sm" 
-                    onClick={handleLike}
-                    className={`flex items-center gap-2 hover:bg-black hover:text-white ${userLikes.has(todayWinner.id) ? 'text-black' : 'text-black'}`}
+                    type="submit" 
+                    size="sm"
+                    className="bg-white text-black border-2 border-black hover:bg-black hover:text-white"
                   >
-                    <Heart className={`w-4 h-4 ${userLikes.has(todayWinner.id) ? 'fill-current' : ''}`} />
-                    {todayWinner.likes_count}
+                    comment
                   </Button>
-                  
-                  <Button variant="ghost" size="sm" className="flex items-center gap-2 text-black hover:bg-black hover:text-white">
-                    <MessageCircle className="w-4 h-4" />
-                    {todayWinner.comments_count}
-                  </Button>
-                  
-                  <Button variant="ghost" size="sm" className="flex items-center gap-2 text-black hover:bg-black hover:text-white">
-                    <Share2 className="w-4 h-4" />
-                    share
-                  </Button>
-                </div>
-                
-                {/* Comments Section */}
-                <div className="space-y-4">
-                  <form onSubmit={handleComment} className="flex gap-2 justify-center">
-                    <Input
-                      value={commentText}
-                      onChange={(e) => setCommentText(e.target.value)}
-                      placeholder="your boring comment"
-                      className="max-w-md border-black focus:border-black focus:ring-black"
-                    />
-                    <Button 
-                      type="submit" 
-                      size="sm"
-                      className="bg-white text-black border-2 border-black hover:bg-black hover:text-white"
-                    >
-                      comment
-                    </Button>
-                  </form>
+                </form>
                   
                   <div className="space-y-2 max-w-2xl mx-auto">
                     {(() => {
