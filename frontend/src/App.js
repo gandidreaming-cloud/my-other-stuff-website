@@ -804,21 +804,20 @@ function App() {
             <div className="mb-8">
               <div className="text-center mb-4">
                 <h2 className="text-2xl font-light text-black">today's boring winner</h2>
+                <div className="text-lg font-medium text-black mt-1">{todayWinner.user_nickname}</div>
                 <div className="text-sm text-black mt-1">
                   {new Date(todayWinner.created_at).toLocaleDateString('en-GB').replace(/\//g, '.')}
                 </div>
               </div>
               
-              <div className="bg-white border border-black rounded-lg p-4 text-center mb-3 max-w-2xl mx-auto">
-                <p className="text-lg leading-relaxed text-black">
+              <div className="bg-white border border-black rounded-lg p-3 text-center mb-3 max-w-lg mx-auto">
+                <div className="text-sm text-black mb-2 font-medium">their story:</div>
+                <p className="text-base leading-relaxed text-black">
                   {todayWinner.text_content}
                 </p>
               </div>
               
               <div className="text-center mb-6">
-                <div className="text-sm text-black mb-1">
-                  by <span className="font-medium">{todayWinner.user_nickname}</span>
-                </div>
                 {(todayWinner.instagram_link || todayWinner.tiktok_link) && (
                   <div className="text-sm text-black">
                     winner's{' '}
