@@ -761,17 +761,19 @@ function App() {
             {/* Three Column Layout */}
             <div className="grid grid-cols-3 items-start">
               {/* Left: User Info with hover logout */}
-              <div className="text-left group relative">
-                <div className="text-xl font-medium text-black">{currentUser.nickname}</div>
-                <div className="text-sm text-black">{currentUser.tokens_remaining} tokens</div>
-                <Button 
-                  onClick={handleLogout}
-                  variant="ghost"
-                  size="sm"
-                  className="absolute left-0 top-0 opacity-0 group-hover:opacity-100 transition-opacity text-black hover:bg-black hover:text-white text-xs -ml-16 mt-1"
-                >
-                  logout
-                </Button>
+              <div className="text-left relative">
+                <div className="group cursor-pointer">
+                  <div className="text-xl font-medium text-black">{currentUser.nickname}</div>
+                  <div className="text-sm text-black">{currentUser.tokens_remaining} tokens</div>
+                  <Button 
+                    onClick={handleLogout}
+                    variant="ghost"
+                    size="sm"
+                    className="absolute left-0 top-0 opacity-0 group-hover:opacity-100 transition-opacity duration-200 text-black hover:bg-black hover:text-white text-xs -ml-16 mt-1 whitespace-nowrap"
+                  >
+                    logout
+                  </Button>
+                </div>
               </div>
               
               {/* Center: Site Title */}
