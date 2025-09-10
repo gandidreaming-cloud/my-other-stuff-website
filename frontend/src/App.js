@@ -1293,6 +1293,66 @@ function App() {
           </DialogContent>
         </Dialog>
 
+        {/* Lottery Preview Modal */}
+        <Dialog open={showLotteryPreview} onOpenChange={setShowLotteryPreview}>
+          <DialogContent className="max-w-2xl border-black">
+            <DialogHeader>
+              <DialogTitle className="text-black">lottery preview</DialogTitle>
+            </DialogHeader>
+            {randomSubmission && (
+              <div className="space-y-4">
+                <div className="bg-white border border-black rounded-lg p-4">
+                  <div className="text-sm text-black font-medium mb-2">
+                    by {randomSubmission.user_nickname}
+                  </div>
+                  <p className="text-black mb-4">
+                    {randomSubmission.text_content}
+                  </p>
+                  {(randomSubmission.instagram_link || randomSubmission.tiktok_link) && (
+                    <div className="text-sm text-black">
+                      links:{' '}
+                      {randomSubmission.instagram_link && (
+                        <a href={randomSubmission.instagram_link} target="_blank" rel="noopener noreferrer" className="text-black hover:underline">
+                          instagram
+                        </a>
+                      )}
+                      {randomSubmission.instagram_link && randomSubmission.tiktok_link && ' / '}
+                      {randomSubmission.tiktok_link && (
+                        <a href={randomSubmission.tiktok_link} target="_blank" rel="noopener noreferrer" className="text-black hover:underline">
+                          tiktok
+                        </a>
+                      )}
+                    </div>
+                  )}
+                </div>
+                
+                <div className="text-center space-x-4">
+                  <Button 
+                    onClick={confirmWinner}
+                    className="bg-white text-black border-2 border-black hover:bg-black hover:text-white"
+                  >
+                    set as winner
+                  </Button>
+                  <Button 
+                    onClick={rejectWinner}
+                    variant="outline"
+                    className="border-black text-black hover:bg-black hover:text-white"
+                  >
+                    try another one
+                  </Button>
+                  <Button 
+                    onClick={() => setShowLotteryPreview(false)}
+                    variant="ghost"
+                    className="text-black hover:bg-black hover:text-white"
+                  >
+                    cancel
+                  </Button>
+                </div>
+              </div>
+            )}
+          </DialogContent>
+        </Dialog>
+
         {/* Info Modals */}
         
         {/* How It Works Modal */}
