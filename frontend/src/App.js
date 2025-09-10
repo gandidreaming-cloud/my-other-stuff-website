@@ -26,6 +26,8 @@ function App() {
   const [interactions, setInteractions] = useState([]);
   const [adminStats, setAdminStats] = useState({});
   const [userLikes, setUserLikes] = useState(new Set());
+  const [showAllComments, setShowAllComments] = useState(false);
+  const [commentLikes, setCommentLikes] = useState(new Map());
   
   // Onboarding states
   const [showOnboarding, setShowOnboarding] = useState(true);
