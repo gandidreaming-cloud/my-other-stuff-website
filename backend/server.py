@@ -362,6 +362,74 @@ async def run_daily_lottery(admin_user_id: str):
     
     return {"message": "Winner selected!", "winner_id": winner["id"]}
 
+@api_router.post("/clear-winner")
+async def clear_current_winner(admin_user_id: str):
+    # Strict owner-only check
+    await verify_owner_admin(admin_user_id)
+    
+    # Clear all current winners
+    result = await db.submissions.update_many(
+        {"is_winner": True},
+        {"$set": {"is_winner": False}}
+    )
+    
+    return {"message": f"Cleared {result.modified_count} winner(s)", "cleared_count": result.modified_count}
+
+@api_router.get("/random-submission")
+async def get_random_submission(admin_user_id: str):
+    # Strict owner-only check
+    await verify_owner_admin(admin_user_id)
+    
+    # Get all approved submissions
+    approved_submissions = await db.submissions.find({
+        "status": "approved"
+    }).to_list(1000)
+    
+    if not approved_submissions:
+        raise HTTPException(status_code=404, detail="No approved submissions available")
+    
+    # Select random submission
+    import random
+    random_submission = random.choice(approved_submissions)
+    
+    # Handle legacy data for user_nickname
+    if "user_nickname" not in random_submission and "user_name" in random_submission:
+        random_submission["user_nickname"] = random_submission["user_name"]
+    elif "user_nickname" not in random_submission:
+        # Get nickname from user data
+        user_data = await db.users.find_one({"id": random_submission["user_id"]})
+        if user_data:
+            random_submission["user_nickname"] = user_data.get("nickname", user_data.get("name", "unknown"))
+        else:
+            random_submission["user_nickname"] = "unknown"
+    
+    return Submission(**parse_from_mongo(random_submission))
+
+@api_router.post("/set-winner/{submission_id}")
+async def set_winner(submission_id: str, admin_user_id: str):
+    # Strict owner-only check
+    await verify_owner_admin(admin_user_id)
+    
+    # Check if submission exists
+    submission = await db.submissions.find_one({"id": submission_id})
+    if not submission:
+        raise HTTPException(status_code=404, detail="Submission not found")
+    
+    # Clear all previous winners first
+    await db.submissions.update_many(
+        {"is_winner": True},
+        {"$set": {"is_winner": False}}
+    )
+    
+    # Set new winner
+    current_datetime = datetime.now(timezone.utc)
+    await db.submissions.update_one(
+        {"id": submission_id},
+        {"$set": {"is_winner": True, "winner_datetime": current_datetime.isoformat()}}
+    )
+    
+    return {"message": "Winner set successfully!", "winner_id": submission_id}
+
 # Interaction routes
 @api_router.post("/submissions/{submission_id}/interactions")
 async def create_interaction(submission_id: str, interaction: InteractionCreate, user_id: str):
