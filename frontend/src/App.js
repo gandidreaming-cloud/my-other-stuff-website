@@ -153,6 +153,11 @@ function App() {
   const [registrationSuccess, setRegistrationSuccess] = useState(false);
   const [magicWord, setMagicWord] = useState("");
   const [showLogin, setShowLogin] = useState(false);
+  
+  // Info modals state
+  const [showHowItWorks, setShowHowItWorks] = useState(false);
+  const [showCommunityRules, setShowCommunityRules] = useState(false);
+  const [showYourStats, setShowYourStats] = useState(false);
 
   // Submission form
   const [subForm, setSubForm] = useState({
