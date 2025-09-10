@@ -167,8 +167,12 @@ class BoringAppAPITester:
         return success
 
     def test_user_not_found(self):
-        """Test login with non-existent email"""
-        success, response = self.run_test("User Not Found", "GET", "users/email/nonexistent@boring.com", 404)
+        """Test login with invalid credentials"""
+        invalid_login = {
+            "nickname": "nonexistent",
+            "magic_word": "invalidmagicword"
+        }
+        success, response = self.run_test("Invalid Login (Should Fail)", "POST", "login", 401, invalid_login)
         return success
 
     def test_content_submission(self):
