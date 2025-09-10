@@ -729,45 +729,35 @@ function App() {
         {/* Header */}
         <header className="bg-white border-b border-black">
           <div className="max-w-4xl mx-auto px-4 py-6">
-            {/* Site Title - Centered */}
-            <div className="text-center mb-6">
-              <h1 className="text-4xl font-light text-black mb-2">boooring</h1>
-              <p className="text-lg text-black">ordinary is extraordinary</p>
-            </div>
-            
-            {/* User Info - Centered */}
-            <div className="text-center mb-6">
-              <div className="text-xl font-medium text-black mb-2">{currentUser.nickname}</div>
-              <div className="text-black">
-                <Badge className="bg-black text-white px-3 py-1">
-                  {currentUser.tokens_remaining} tokens
-                </Badge>
-                {currentUser.is_admin && (
-                  <Badge className="ml-2 bg-black text-white px-3 py-1">admin</Badge>
-                )}
+            {/* Top Row: Site Title + Admin Button */}
+            <div className="flex justify-between items-start mb-4">
+              <div className="text-center flex-1">
+                <h1 className="text-4xl font-light text-black mb-2">boooring</h1>
+                <p className="text-lg text-black mb-4">ordinary is extraordinary</p>
+                
+                {/* User Info - Close to site title */}
+                <div className="text-xl font-medium text-black mb-2">{currentUser.nickname}</div>
+                <div className="text-black mb-4">
+                  <Badge className="bg-black text-white px-3 py-1">
+                    {currentUser.tokens_remaining} tokens
+                  </Badge>
+                </div>
               </div>
+              
+              {/* Admin Button - Top Right */}
+              {currentUser.is_admin && (
+                <Button 
+                  onClick={() => setShowAdmin(true)} 
+                  size="sm"
+                  className="border-black text-black hover:bg-black hover:text-white text-xs px-2 py-1"
+                >
+                  admin
+                </Button>
+              )}
             </div>
             
             {/* Action Buttons - Centered */}
             <div className="text-center space-x-4">
-              <Button 
-                onClick={() => setShowSubmission(true)} 
-                disabled={currentUser.tokens_remaining <= 0}
-                className="bg-white text-black border-2 border-black hover:bg-black hover:text-white"
-              >
-                submit boring content
-              </Button>
-              
-              {currentUser.is_admin && (
-                <Button 
-                  onClick={() => setShowAdmin(true)} 
-                  variant="outline"
-                  className="border-black text-black hover:bg-black hover:text-white"
-                >
-                  admin panel
-                </Button>
-              )}
-              
               <Button 
                 onClick={handleLogout}
                 variant="ghost"
