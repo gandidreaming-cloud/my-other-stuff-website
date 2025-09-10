@@ -104,6 +104,25 @@
 
 user_problem_statement: "Test the updated 'Boring' app frontend with focus on the main competition page (page 3) changes including winner display structure, social media links layout, share button, comment functionality, and admin tokens verification."
 
+backend:
+  - task: "Comments database verification and interactions API functionality"
+    implemented: true
+    working: true
+    file: "/app/backend/server.py"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: false
+    status_history:
+        - working: "NA"
+        - agent: "testing"
+        - comment: "Quick test to verify comments exist in database and interactions API is working. Need to check current winner, count interactions, specifically count comments, and test GET /api/submissions/{submission_id}/interactions endpoint."
+        - working: false
+        - agent: "testing"
+        - comment: "❌ CRITICAL BUG FOUND: GET /api/submissions/{submission_id}/interactions endpoint returning 500 error due to PydanticSerializationError - MongoDB ObjectId not being removed from response data. This prevents frontend from loading comments."
+        - working: true
+        - agent: "testing"
+        - comment: "✅ FIXED: Updated parse_from_mongo() function to remove MongoDB '_id' field before serialization. Comments verification test now passes: Found exactly 5 comments in database, interactions API returning correct data with all required fields (id, user_nickname, content, created_at, likes_count), API consistently returns 6 total interactions (5 comments + 1 submission like). All comment data properly formatted and accessible."
+
 frontend:
   - task: "Onboarding flow and user registration/login"
     implemented: true
