@@ -29,6 +29,8 @@ function App() {
   const [showAllComments, setShowAllComments] = useState(false);
   const [commentLikes, setCommentLikes] = useState(new Map());
   const [showCommentForm, setShowCommentForm] = useState(false);
+  const [randomSubmission, setRandomSubmission] = useState(null);
+  const [showLotteryPreview, setShowLotteryPreview] = useState(false);
   
   // Onboarding states
   const [showOnboarding, setShowOnboarding] = useState(true);
