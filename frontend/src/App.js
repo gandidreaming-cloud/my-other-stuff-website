@@ -1261,13 +1261,29 @@ function App() {
                     <CardContent className="pt-4">
                       <h3 className="font-medium mb-2 text-black">daily lottery</h3>
                       <p className="text-sm text-black mb-4">
-                        manually trigger the daily winner selection
+                        randomly preview submissions for winner selection
                       </p>
                       <Button 
                         onClick={runLottery}
-                        className="bg-white text-black border-2 border-black hover:bg-black hover:text-white"
+                        className="bg-white text-black border-2 border-black hover:bg-black hover:text-white mr-2"
                       >
                         run lottery now
+                      </Button>
+                    </CardContent>
+                  </Card>
+                  
+                  <Card className="border-black">
+                    <CardContent className="pt-4">
+                      <h3 className="font-medium mb-2 text-black">winner management</h3>
+                      <p className="text-sm text-black mb-4">
+                        clear current winner to prepare for next lottery
+                      </p>
+                      <Button 
+                        onClick={clearWinner}
+                        variant="outline"
+                        className="border-black text-black hover:bg-black hover:text-white"
+                      >
+                        clear current winner
                       </Button>
                     </CardContent>
                   </Card>
