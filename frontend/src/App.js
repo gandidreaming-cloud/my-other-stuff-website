@@ -891,77 +891,76 @@ function App() {
                     comment
                   </Button>
                 </form>
-                  
-                  <div className="space-y-2 max-w-2xl mx-auto">
-                    {(() => {
-                      const comments = interactions.filter(int => int.type === "comment");
-                      // Sort comments by likes count (descending), then by creation date (ascending)
-                      const sortedComments = comments.sort((a, b) => {
-                        const likesA = a.likes_count || 0;
-                        const likesB = b.likes_count || 0;
-                        if (likesA !== likesB) {
-                          return likesB - likesA; // Most liked first
-                        }
-                        return new Date(a.created_at) - new Date(b.created_at); // Oldest first if same likes
-                      });
-                      
-                      const commentsToShow = showAllComments ? sortedComments : sortedComments.slice(0, 3);
-                      
-                      return (
-                        <>
-                          {commentsToShow.map(comment => (
-                            <div key={comment.id} className="bg-white border border-black rounded p-3 flex justify-between items-start">
-                              <div className="flex-1">
-                                <div className="font-medium text-sm text-black">{comment.user_nickname}</div>
-                                <div className="text-black mb-2">{comment.content}</div>
-                                <div className="flex items-center gap-2">
-                                  <button
-                                    onClick={() => handleCommentLike(comment.id)}
-                                    className="flex items-center gap-1 text-xs text-black hover:bg-black hover:text-white px-2 py-1 rounded"
-                                  >
-                                    <Heart className={`w-3 h-3 ${comment.likes_count > 0 ? 'fill-current' : ''}`} />
-                                    {comment.likes_count || 0}
-                                  </button>
-                                </div>
-                              </div>
-                              <div className="text-xs text-black ml-4">
-                                {new Date(comment.created_at).toLocaleDateString('en-GB')}
+                
+                <div className="space-y-2 max-w-2xl mx-auto">
+                  {(() => {
+                    const comments = interactions.filter(int => int.type === "comment");
+                    // Sort comments by likes count (descending), then by creation date (ascending)
+                    const sortedComments = comments.sort((a, b) => {
+                      const likesA = a.likes_count || 0;
+                      const likesB = b.likes_count || 0;
+                      if (likesA !== likesB) {
+                        return likesB - likesA; // Most liked first
+                      }
+                      return new Date(a.created_at) - new Date(b.created_at); // Oldest first if same likes
+                    });
+                    
+                    const commentsToShow = showAllComments ? sortedComments : sortedComments.slice(0, 3);
+                    
+                    return (
+                      <>
+                        {commentsToShow.map(comment => (
+                          <div key={comment.id} className="bg-white border border-black rounded p-3 flex justify-between items-start">
+                            <div className="flex-1">
+                              <div className="font-medium text-sm text-black">{comment.user_nickname}</div>
+                              <div className="text-black mb-2">{comment.content}</div>
+                              <div className="flex items-center gap-2">
+                                <button
+                                  onClick={() => handleCommentLike(comment.id)}
+                                  className="flex items-center gap-1 text-xs text-black hover:bg-black hover:text-white px-2 py-1 rounded"
+                                >
+                                  <Heart className={`w-3 h-3 ${comment.likes_count > 0 ? 'fill-current' : ''}`} />
+                                  {comment.likes_count || 0}
+                                </button>
                               </div>
                             </div>
-                          ))}
-                          
-                          {!showAllComments && sortedComments.length > 3 && (
-                            <div className="text-center">
-                              <Button
-                                variant="ghost"
-                                size="sm"
-                                onClick={() => setShowAllComments(true)}
-                                className="text-black hover:bg-black hover:text-white"
-                              >
-                                еще комментарии ({sortedComments.length - 3})
-                              </Button>
+                            <div className="text-xs text-black ml-4">
+                              {new Date(comment.created_at).toLocaleDateString('en-GB').replace(/\//g, '.')}
                             </div>
-                          )}
-                          
-                          {showAllComments && sortedComments.length > 3 && (
-                            <div className="text-center">
-                              <Button
-                                variant="ghost"
-                                size="sm"
-                                onClick={() => setShowAllComments(false)}
-                                className="text-black hover:bg-black hover:text-white"
-                              >
-                                скрыть комментарии
-                              </Button>
-                            </div>
-                          )}
-                        </>
-                      );
-                    })()}
-                  </div>
+                          </div>
+                        ))}
+                        
+                        {!showAllComments && sortedComments.length > 3 && (
+                          <div className="text-center">
+                            <Button
+                              variant="ghost"
+                              size="sm"
+                              onClick={() => setShowAllComments(true)}
+                              className="text-black hover:bg-black hover:text-white"
+                            >
+                              еще комментарии ({sortedComments.length - 3})
+                            </Button>
+                          </div>
+                        )}
+                        
+                        {showAllComments && sortedComments.length > 3 && (
+                          <div className="text-center">
+                            <Button
+                              variant="ghost"
+                              size="sm"
+                              onClick={() => setShowAllComments(false)}
+                              className="text-black hover:bg-black hover:text-white"
+                            >
+                              скрыть комментарии
+                            </Button>
+                          </div>
+                        )}
+                      </>
+                    );
+                  })()}
                 </div>
-              </CardContent>
-            </Card>
+              </div>
+            </div>
           ) : (
             <Card className="mb-8 text-center py-12 border-black relative">
               <CardContent>
