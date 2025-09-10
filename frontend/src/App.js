@@ -1107,6 +1107,61 @@ function App() {
             </Tabs>
           </DialogContent>
         </Dialog>
+
+        {/* Info Modals */}
+        
+        {/* How It Works Modal */}
+        <Dialog open={showHowItWorks} onOpenChange={setShowHowItWorks}>
+          <DialogContent className="max-w-md border-black">
+            <DialogHeader>
+              <DialogTitle className="text-black flex items-center gap-2">
+                <Trophy className="w-5 h-5" />
+                how it works
+              </DialogTitle>
+            </DialogHeader>
+            <div className="text-sm text-black space-y-2">
+              <p>• submit your most boring moment using a token</p>
+              <p>• admin reviews and approves submissions</p>
+              <p>• one random winner chosen daily at GMT+2</p>
+              <p>• everyone can like, comment, and share the winner</p>
+            </div>
+          </DialogContent>
+        </Dialog>
+
+        {/* Community Rules Modal */}
+        <Dialog open={showCommunityRules} onOpenChange={setShowCommunityRules}>
+          <DialogContent className="max-w-md border-black">
+            <DialogHeader>
+              <DialogTitle className="text-black flex items-center gap-2">
+                <Users className="w-5 h-5" />
+                community rules
+              </DialogTitle>
+            </DialogHeader>
+            <div className="text-sm text-black space-y-2">
+              <p>• celebrate the ordinary and mundane</p>
+              <p>• no judgment, only support</p>
+              <p>• keep it boring and wholesome</p>
+              <p>• share your everyday moments</p>
+            </div>
+          </DialogContent>
+        </Dialog>
+
+        {/* Your Stats Modal */}
+        <Dialog open={showYourStats} onOpenChange={setShowYourStats}>
+          <DialogContent className="max-w-md border-black">
+            <DialogHeader>
+              <DialogTitle className="text-black flex items-center gap-2">
+                <FileText className="w-5 h-5" />
+                your stats
+              </DialogTitle>
+            </DialogHeader>
+            <div className="text-sm text-black space-y-2">
+              <p>tokens remaining: <span className="font-bold">{currentUser.tokens_remaining}</span></p>
+              <p>member since: {new Date(currentUser.created_at).toLocaleDateString()}</p>
+              <p>boring level: <span className="font-bold">maximum</span></p>
+            </div>
+          </DialogContent>
+        </Dialog>
       </div>
     );
   }
