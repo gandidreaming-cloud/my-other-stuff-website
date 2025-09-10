@@ -733,12 +733,8 @@ function App() {
             <div className="grid grid-cols-3 items-start">
               {/* Left: User Info */}
               <div className="text-left">
-                <div className="text-xl font-medium text-black mb-2">{currentUser.nickname}</div>
-                <div className="text-black">
-                  <Badge className="bg-black text-white px-3 py-1">
-                    {currentUser.tokens_remaining} tokens
-                  </Badge>
-                </div>
+                <div className="text-xl font-medium text-black">{currentUser.nickname}</div>
+                <div className="text-sm text-black">{currentUser.tokens_remaining} tokens</div>
               </div>
               
               {/* Center: Site Title */}
