@@ -760,10 +760,18 @@ function App() {
           <div className="max-w-4xl mx-auto px-4 py-6">
             {/* Three Column Layout */}
             <div className="grid grid-cols-3 items-start">
-              {/* Left: User Info */}
-              <div className="text-left">
+              {/* Left: User Info with hover logout */}
+              <div className="text-left group relative">
                 <div className="text-xl font-medium text-black">{currentUser.nickname}</div>
                 <div className="text-sm text-black">{currentUser.tokens_remaining} tokens</div>
+                <Button 
+                  onClick={handleLogout}
+                  variant="ghost"
+                  size="sm"
+                  className="absolute left-0 top-0 opacity-0 group-hover:opacity-100 transition-opacity text-black hover:bg-black hover:text-white text-xs -ml-16 mt-1"
+                >
+                  logout
+                </Button>
               </div>
               
               {/* Center: Site Title */}
@@ -772,8 +780,17 @@ function App() {
                 <p className="text-xs text-black">ordinary is extraordinary</p>
               </div>
               
-              {/* Right: Admin & Logout */}
+              {/* Right: Submit button and Admin */}
               <div className="text-right space-y-2">
+                <div>
+                  <Button 
+                    onClick={() => setShowSubmission(true)}
+                    size="sm"
+                    className="border-black text-black hover:bg-black hover:text-white text-xs px-2 py-1"
+                  >
+                    submit your<br/>boring story<br/>for tomorrow
+                  </Button>
+                </div>
                 {currentUser.is_admin && (
                   <div>
                     <Button 
@@ -785,16 +802,6 @@ function App() {
                     </Button>
                   </div>
                 )}
-                <div>
-                  <Button 
-                    onClick={handleLogout}
-                    variant="ghost"
-                    size="sm"
-                    className="text-black hover:bg-black hover:text-white text-xs"
-                  >
-                    logout
-                  </Button>
-                </div>
               </div>
             </div>
           </div>
