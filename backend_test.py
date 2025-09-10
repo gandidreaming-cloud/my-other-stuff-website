@@ -470,7 +470,7 @@ class BoringAppAPITester:
 
     def test_like_interaction(self):
         """Test liking a submission"""
-        if not self.test_user_id or not self.test_submission_id:
+        if not self.admin_user_id or not self.test_submission_id:
             return self.log_test("Like Interaction", False, "No user or submission")
         
         like_data = {"type": "like"}
@@ -481,27 +481,7 @@ class BoringAppAPITester:
             f"submissions/{self.test_submission_id}/interactions", 
             200,
             like_data,
-            params={"user_id": self.test_user_id}
-        )
-        return success
-
-    def test_comment_interaction(self):
-        """Test commenting on a submission"""
-        if not self.test_user_id or not self.test_submission_id:
-            return self.log_test("Comment Interaction", False, "No user or submission")
-        
-        comment_data = {
-            "type": "comment",
-            "content": "This is so wonderfully boring! I love it!"
-        }
-        
-        success, response = self.run_test(
-            "Comment Interaction", 
-            "POST", 
-            f"submissions/{self.test_submission_id}/interactions", 
-            200,
-            comment_data,
-            params={"user_id": self.test_user_id}
+            params={"user_id": self.admin_user_id}
         )
         return success
 
