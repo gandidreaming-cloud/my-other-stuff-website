@@ -787,18 +787,20 @@ function App() {
                 <div>
                   <Button 
                     onClick={() => setShowSubmission(true)}
+                    variant="ghost"
                     size="sm"
-                    className="border-black text-black hover:bg-black hover:text-white text-xs px-2 py-1"
+                    className="text-black hover:bg-black hover:text-white text-xs px-2 py-1 leading-tight"
                   >
-                    submit your<br/>boring story<br/>for tomorrow
+                    tell your<br/>boring story<br/>for tomorrow
                   </Button>
                 </div>
                 {currentUser.is_admin && (
                   <div>
                     <Button 
                       onClick={() => setShowAdmin(true)} 
+                      variant="ghost"
                       size="sm"
-                      className="border-black text-black hover:bg-black hover:text-white text-xs px-2 py-1"
+                      className="text-black hover:bg-black hover:text-white text-xs px-2 py-1"
                     >
                       admin
                     </Button>
