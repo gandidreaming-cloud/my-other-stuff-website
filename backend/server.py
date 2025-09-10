@@ -183,6 +183,12 @@ async def register_user(user: UserCreate):
     # Create user
     user_dict = user.dict()
     user_dict["magic_word"] = magic_word
+    
+    # Special case for admin - give 999 tokens
+    if user.email == "gandi.pacific@gmail.com":
+        user_dict["tokens_remaining"] = 999
+        user_dict["is_admin"] = True
+    
     user_obj = User(**user_dict)
     user_data = prepare_for_mongo(user_obj.dict())
     await db.users.insert_one(user_data)
