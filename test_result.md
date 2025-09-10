@@ -101,3 +101,99 @@
 #====================================================================================================
 # Testing Data - Main Agent and testing sub agent both should log testing data below this section
 #====================================================================================================
+
+user_problem_statement: "Test the updated 'Boring' app frontend with focus on the main competition page (page 3) changes including winner display structure, social media links layout, share button, comment functionality, and admin tokens verification."
+
+frontend:
+  - task: "Onboarding flow and user registration/login"
+    implemented: true
+    working: "NA"
+    file: "/app/frontend/src/App.js"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: true
+    status_history:
+        - working: "NA"
+        - agent: "testing"
+        - comment: "Need to test onboarding flow with 'yes' answer leading to registration/login"
+
+  - task: "Winner display structure with updated design"
+    implemented: true
+    working: "NA"
+    file: "/app/frontend/src/App.js"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: true
+    status_history:
+        - working: "NA"
+        - agent: "testing"
+        - comment: "Need to verify no big outer frame, story content border, winner title with 😴 emoji, date format DD.MM.YYYY"
+
+  - task: "Social media links layout"
+    implemented: true
+    working: "NA"
+    file: "/app/frontend/src/App.js"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: true
+    status_history:
+        - working: "NA"
+        - agent: "testing"
+        - comment: "Need to verify 'by [nickname]' and 'their instagram/tiktok' are separate from story content box"
+
+  - task: "Share button without icon"
+    implemented: true
+    working: "NA"
+    file: "/app/frontend/src/App.js"
+    stuck_count: 0
+    priority: "medium"
+    needs_retesting: true
+    status_history:
+        - working: "NA"
+        - agent: "testing"
+        - comment: "Need to verify share button shows only 'share' text without icon"
+
+  - task: "Comment functionality with character limit and display"
+    implemented: true
+    working: "NA"
+    file: "/app/frontend/src/App.js"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: true
+    status_history:
+        - working: "NA"
+        - agent: "testing"
+        - comment: "Need to test 300 char limit, placeholder 'your boring comment', 3 comments display with 'еще комментарии' button, like buttons, DD.MM.YYYY date format"
+
+  - task: "Admin tokens display (999 tokens)"
+    implemented: true
+    working: "NA"
+    file: "/app/frontend/src/App.js"
+    stuck_count: 0
+    priority: "medium"
+    needs_retesting: true
+    status_history:
+        - working: "NA"
+        - agent: "testing"
+        - comment: "Need to verify admin user (gandi) has 999 tokens displayed"
+
+metadata:
+  created_by: "testing_agent"
+  version: "1.0"
+  test_sequence: 1
+
+test_plan:
+  current_focus:
+    - "Winner display structure with updated design"
+    - "Comment functionality with character limit and display"
+    - "Social media links layout"
+    - "Admin tokens display (999 tokens)"
+    - "Onboarding flow and user registration/login"
+    - "Share button without icon"
+  stuck_tasks: []
+  test_all: true
+  test_priority: "high_first"
+
+agent_communication:
+    - agent: "testing"
+    - message: "Starting comprehensive testing of updated Boring app frontend focusing on page 3 design changes. Will test onboarding flow, login as admin, verify winner display structure, comment functionality, and all specified design elements."
