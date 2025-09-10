@@ -949,29 +949,7 @@ function App() {
                 <Button 
                   variant="ghost" 
                   size="sm" 
-                  className="flex items-center gap-1 text-black hover:bg-black hover:text-white px-1 py-1 cursor-pointer"
-                  onClick={() => {
-                    // Toggle comments visibility
-                    setShowComments(!showComments);
-                    
-                    // If showing comments, load them if needed
-                    if (!showComments && todayWinner && interactions.length === 0) {
-                      fetchInteractions(todayWinner.id);
-                    }
-                    
-                    // Scroll to comments section if showing
-                    if (!showComments) {
-                      setTimeout(() => {
-                        const commentsSection = document.querySelector('.comments-section');
-                        if (commentsSection) {
-                          commentsSection.scrollIntoView({ 
-                            behavior: 'smooth',
-                            block: 'center'
-                          });
-                        }
-                      }, 100);
-                    }
-                  }}
+                  className="flex items-center gap-1 text-black hover:bg-black hover:text-white px-1 py-1"
                 >
                   <MessageCircle className="w-4 h-4" />
                   {todayWinner.comments_count}
