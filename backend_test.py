@@ -774,6 +774,31 @@ class BoringAppAPITester:
         self.test_run_lottery()
         self.test_today_winner()
         
+        # NEW ADMIN FUNCTIONALITY TESTS
+        print("\n🔧 Testing New Admin Functionality:")
+        print("-" * 40)
+        
+        # Clear winner functionality
+        self.test_clear_winner()
+        self.test_clear_winner_unauthorized()
+        
+        # Random submission functionality  
+        self.test_random_submission()
+        self.test_random_submission_unauthorized()
+        
+        # Set winner functionality
+        self.test_set_winner()
+        self.test_set_winner_nonexistent()
+        self.test_set_winner_unauthorized()
+        
+        # Updated 20-hour winner logic
+        self.test_today_winner_20_hour_logic()
+        
+        # Updated lottery with datetime logic
+        self.test_lottery_datetime_logic()
+        
+        print("-" * 40)
+        
         # Social interactions
         self.test_like_interaction()
         self.test_comment_interaction()
