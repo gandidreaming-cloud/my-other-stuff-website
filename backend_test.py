@@ -164,7 +164,9 @@ class BoringAppAPITester:
                     return True
                 except:
                     pass
-        return success
+            return success
+        else:
+            return self.log_test("User Login", False, "No admin credentials available")
 
     def test_user_not_found(self):
         """Test login with invalid credentials"""
