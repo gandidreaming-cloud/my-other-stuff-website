@@ -739,8 +739,8 @@ function App() {
               
               {/* Center: Site Title */}
               <div className="text-center">
-                <h1 className="text-4xl font-light text-black mb-2">boooring</h1>
-                <p className="text-sm text-black">ordinary is extraordinary</p>
+                <h1 className="text-4xl font-light text-black mb-1">boooring</h1>
+                <p className="text-xs text-black">ordinary is extraordinary</p>
               </div>
               
               {/* Right: Admin & Logout */}
