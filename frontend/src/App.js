@@ -647,15 +647,14 @@ function App() {
             </div>
           </div>
             
-            <div className="text-center mt-8">
-              <Button
-                onClick={() => {setShowRegistration(false); setShowLogin(true);}}
-                variant="ghost"
-                className="text-black hover:bg-black hover:text-white"
-              >
-                already have account? login
-              </Button>
-            </div>
+          <div className="text-center mt-8">
+            <Button
+              onClick={() => {setShowRegistration(false); setShowLogin(true);}}
+              variant="ghost"
+              className="text-black hover:bg-black hover:text-white"
+            >
+              already have account? login
+            </Button>
           </div>
         </div>
       </div>
