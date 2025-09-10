@@ -907,7 +907,17 @@ function App() {
                   {todayWinner.likes_count}
                 </Button>
                 
-                <Button variant="ghost" size="sm" className="flex items-center gap-1 text-black hover:bg-black hover:text-white px-1 py-1">
+                <Button 
+                  variant="ghost" 
+                  size="sm" 
+                  className="flex items-center gap-1 text-black hover:bg-black hover:text-white px-1 py-1 cursor-pointer"
+                  onClick={() => {
+                    const commentsSection = document.querySelector('.comments-section');
+                    if (commentsSection) {
+                      commentsSection.scrollIntoView({ behavior: 'smooth' });
+                    }
+                  }}
+                >
                   <MessageCircle className="w-4 h-4" />
                   {todayWinner.comments_count}
                 </Button>
