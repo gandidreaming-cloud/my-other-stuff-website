@@ -511,6 +511,238 @@ class BoringAppAPITester:
                 pass
         return success
 
+    def test_clear_winner(self):
+        """Test clearing current winner functionality"""
+        if not self.admin_user_id:
+            return self.log_test("Clear Winner", False, "No admin user")
+        
+        success, response = self.run_test(
+            "Clear Current Winner", 
+            "POST", 
+            "clear-winner", 
+            200,
+            params={"admin_user_id": self.admin_user_id}
+        )
+        
+        if success and response:
+            try:
+                result = response.json()
+                cleared_count = result.get('cleared_count', 0)
+                print(f"   📝 Cleared {cleared_count} winner(s)")
+                print(f"   📝 Message: {result.get('message')}")
+                return True
+            except:
+                pass
+        return success
+
+    def test_clear_winner_unauthorized(self):
+        """Test clear winner with invalid admin user (should fail)"""
+        fake_admin_id = str(uuid.uuid4())
+        
+        success, response = self.run_test(
+            "Clear Winner Unauthorized (Should Fail)", 
+            "POST", 
+            "clear-winner", 
+            403,
+            params={"admin_user_id": fake_admin_id}
+        )
+        return success
+
+    def test_random_submission(self):
+        """Test getting random submission for lottery preview"""
+        if not self.admin_user_id:
+            return self.log_test("Random Submission", False, "No admin user")
+        
+        success, response = self.run_test(
+            "Get Random Submission", 
+            "GET", 
+            "random-submission", 
+            200,
+            params={"admin_user_id": self.admin_user_id}
+        )
+        
+        if success and response:
+            try:
+                submission = response.json()
+                print(f"   📝 Random submission ID: {submission.get('id')}")
+                print(f"   📝 User nickname: {submission.get('user_nickname')}")
+                print(f"   📝 Content: {submission.get('text_content', '')[:50]}...")
+                print(f"   📝 Status: {submission.get('status')}")
+                
+                # Verify it's an approved submission
+                if submission.get('status') == 'approved':
+                    print("   ✅ Random submission is approved")
+                    return True
+                else:
+                    print(f"   ❌ Expected approved submission, got {submission.get('status')}")
+                    return False
+            except Exception as e:
+                print(f"   ❌ Error processing random submission: {e}")
+                pass
+        return success
+
+    def test_random_submission_unauthorized(self):
+        """Test random submission with invalid admin user (should fail)"""
+        fake_admin_id = str(uuid.uuid4())
+        
+        success, response = self.run_test(
+            "Random Submission Unauthorized (Should Fail)", 
+            "GET", 
+            "random-submission", 
+            403,
+            params={"admin_user_id": fake_admin_id}
+        )
+        return success
+
+    def test_set_winner(self):
+        """Test setting specific submission as winner"""
+        if not self.admin_user_id or not self.test_submission_id:
+            return self.log_test("Set Winner", False, "No admin user or submission")
+        
+        success, response = self.run_test(
+            "Set Specific Winner", 
+            "POST", 
+            f"set-winner/{self.test_submission_id}", 
+            200,
+            params={"admin_user_id": self.admin_user_id}
+        )
+        
+        if success and response:
+            try:
+                result = response.json()
+                winner_id = result.get('winner_id')
+                print(f"   📝 Set winner ID: {winner_id}")
+                print(f"   📝 Message: {result.get('message')}")
+                
+                if winner_id == self.test_submission_id:
+                    print("   ✅ Winner set correctly")
+                    return True
+                else:
+                    print(f"   ❌ Expected winner ID {self.test_submission_id}, got {winner_id}")
+                    return False
+            except Exception as e:
+                print(f"   ❌ Error processing set winner: {e}")
+                pass
+        return success
+
+    def test_set_winner_nonexistent(self):
+        """Test setting non-existent submission as winner (should fail)"""
+        if not self.admin_user_id:
+            return self.log_test("Set Winner Non-existent", False, "No admin user")
+        
+        fake_submission_id = str(uuid.uuid4())
+        
+        success, response = self.run_test(
+            "Set Non-existent Winner (Should Fail)", 
+            "POST", 
+            f"set-winner/{fake_submission_id}", 
+            404,
+            params={"admin_user_id": self.admin_user_id}
+        )
+        return success
+
+    def test_set_winner_unauthorized(self):
+        """Test set winner with invalid admin user (should fail)"""
+        if not self.test_submission_id:
+            return self.log_test("Set Winner Unauthorized", False, "No submission")
+        
+        fake_admin_id = str(uuid.uuid4())
+        
+        success, response = self.run_test(
+            "Set Winner Unauthorized (Should Fail)", 
+            "POST", 
+            f"set-winner/{self.test_submission_id}", 
+            403,
+            params={"admin_user_id": fake_admin_id}
+        )
+        return success
+
+    def test_today_winner_20_hour_logic(self):
+        """Test today's winner with 20-hour logic"""
+        success, response = self.run_test("Get Today's Winner (20-hour logic)", "GET", "today-winner", 200)
+        
+        if success and response:
+            try:
+                winner = response.json()
+                if winner:
+                    print(f"   📝 Winner found: {winner.get('user_nickname')}")
+                    print(f"   📝 Content: {winner.get('text_content', '')[:50]}...")
+                    print(f"   📝 Is winner: {winner.get('is_winner')}")
+                    
+                    # Check if winner_datetime field exists (new field)
+                    if 'winner_datetime' in winner:
+                        print(f"   📝 Winner datetime: {winner.get('winner_datetime')}")
+                        print("   ✅ Winner uses new datetime field")
+                    else:
+                        print("   ⚠️  Winner datetime field not found")
+                    
+                    return True
+                else:
+                    print("   📝 No current winner (within 20 hours)")
+                    return True
+            except Exception as e:
+                print(f"   ❌ Error processing today's winner: {e}")
+                pass
+        return success
+
+    def test_lottery_datetime_logic(self):
+        """Test lottery with datetime logic instead of date"""
+        if not self.admin_user_id:
+            return self.log_test("Lottery Datetime Logic", False, "No admin user")
+        
+        # First clear any existing winner
+        clear_success, _ = self.run_test(
+            "Clear Winner for Lottery Test", 
+            "POST", 
+            "clear-winner", 
+            200,
+            params={"admin_user_id": self.admin_user_id}
+        )
+        
+        if not clear_success:
+            return self.log_test("Lottery Datetime Logic", False, "Failed to clear existing winner")
+        
+        # Now run lottery
+        success, response = self.run_test(
+            "Run Lottery (Datetime Logic)", 
+            "POST", 
+            "run-lottery", 
+            200,
+            params={"admin_user_id": self.admin_user_id}
+        )
+        
+        if success and response:
+            try:
+                result = response.json()
+                print(f"   📝 Lottery result: {result.get('message')}")
+                if "winner_id" in result:
+                    winner_id = result['winner_id']
+                    print(f"   📝 Winner ID: {winner_id}")
+                    
+                    # Verify the winner has winner_datetime set
+                    winner_success, winner_response = self.run_test(
+                        "Verify Winner Datetime", 
+                        "GET", 
+                        "today-winner", 
+                        200
+                    )
+                    
+                    if winner_success and winner_response:
+                        winner_data = winner_response.json()
+                        if winner_data and 'winner_datetime' in winner_data:
+                            print(f"   📝 Winner datetime set: {winner_data['winner_datetime']}")
+                            print("   ✅ Lottery uses datetime logic correctly")
+                            return True
+                        else:
+                            print("   ❌ Winner datetime not set properly")
+                            return False
+                    
+                return True
+            except Exception as e:
+                print(f"   ❌ Error processing lottery: {e}")
+                pass
+        return success
+
     def test_admin_stats(self):
         """Test getting admin statistics - this endpoint doesn't exist in current API"""
         return self.log_test("Admin Stats", True, "Endpoint not implemented in current API")
