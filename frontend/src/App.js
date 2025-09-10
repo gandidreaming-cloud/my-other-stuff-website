@@ -778,22 +778,22 @@ function App() {
           {/* Today's Winner */}
           {todayWinner ? (
             <Card className="mb-8 border-2 border-black bg-white">
-              <CardHeader>
-                <div className="flex items-center gap-2">
+              <CardHeader className="text-center">
+                <div className="flex justify-center items-center gap-2 mb-2">
                   <Trophy className="w-6 h-6 text-black" />
                   <CardTitle className="text-black">today's boring winner</CardTitle>
-                  <Badge className="bg-black text-white">
-                    {new Date(todayWinner.created_at).toLocaleDateString()}
-                  </Badge>
                 </div>
+                <Badge className="bg-black text-white">
+                  {new Date(todayWinner.created_at).toLocaleDateString()}
+                </Badge>
               </CardHeader>
               <CardContent className="space-y-4">
-                <div className="bg-white border border-black rounded-lg p-4">
+                <div className="bg-white border border-black rounded-lg p-4 text-center">
                   <p className="text-lg leading-relaxed text-black mb-4">
                     {todayWinner.text_content}
                   </p>
                   
-                  <div className="flex flex-wrap gap-3 mb-4">
+                  <div className="flex justify-center gap-3 mb-4">
                     {todayWinner.instagram_link && (
                       <a 
                         href={todayWinner.instagram_link} 
@@ -801,7 +801,7 @@ function App() {
                         rel="noopener noreferrer"
                         className="text-black hover:underline font-medium"
                       >
-                        📸 Instagram
+                        📸 instagram
                       </a>
                     )}
                     {todayWinner.tiktok_link && (
@@ -811,7 +811,7 @@ function App() {
                         rel="noopener noreferrer"
                         className="text-black hover:underline font-medium"
                       >
-                        🎵 TikTok
+                        🎵 tiktok
                       </a>
                     )}
                   </div>
@@ -822,7 +822,7 @@ function App() {
                 </div>
                 
                 {/* Interaction Buttons */}
-                <div className="flex gap-4 items-center">
+                <div className="flex justify-center gap-4 items-center">
                   <Button 
                     variant="ghost" 
                     size="sm" 
@@ -846,12 +846,12 @@ function App() {
                 
                 {/* Comments Section */}
                 <div className="space-y-4">
-                  <form onSubmit={handleComment} className="flex gap-2">
+                  <form onSubmit={handleComment} className="flex gap-2 justify-center">
                     <Input
                       value={commentText}
                       onChange={(e) => setCommentText(e.target.value)}
                       placeholder="add a supportive comment..."
-                      className="flex-1 border-black focus:border-black focus:ring-black"
+                      className="max-w-md border-black focus:border-black focus:ring-black"
                     />
                     <Button 
                       type="submit" 
@@ -862,7 +862,7 @@ function App() {
                     </Button>
                   </form>
                   
-                  <div className="space-y-2">
+                  <div className="space-y-2 max-w-2xl mx-auto">
                     {interactions
                       .filter(int => int.type === "comment")
                       .map(comment => (
@@ -880,11 +880,11 @@ function App() {
               <CardContent>
                 <Clock className="w-12 h-12 text-black mx-auto mb-4" />
                 <h2 className="text-2xl font-light text-black mb-2">no winner yet today</h2>
-                <p className="text-black">the daily lottery runs at 4pm berlin time</p>
+                <p className="text-black mb-4">the daily lottery at GMT+2</p>
                 {currentUser.is_admin && (
                   <Button 
                     onClick={runLottery} 
-                    className="mt-4 bg-white text-black border-2 border-black hover:bg-black hover:text-white"
+                    className="bg-white text-black border-2 border-black hover:bg-black hover:text-white"
                   >
                     run lottery now (admin)
                   </Button>
