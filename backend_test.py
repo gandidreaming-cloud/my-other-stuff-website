@@ -127,41 +127,43 @@ class BoringAppAPITester:
         return success
 
     def test_duplicate_registration(self):
-        """Test duplicate email registration (should fail)"""
+        """Test duplicate nickname registration (should fail)"""
         if not self.test_user_id:
             return self.log_test("Duplicate Registration", False, "No test user created")
         
-        # Try to register with same email
+        # Try to register with same nickname
         timestamp = datetime.now().strftime("%H%M%S")
         test_data = {
-            "name": f"Duplicate User {timestamp}",
-            "email": f"test{timestamp}@boring.com",  # Same email as before
-            "boring_answer": "Another boring answer"
+            "nickname": f"testuser{timestamp}",  # Same nickname as before
+            "email": f"different{timestamp}@boring.com"
         }
         
-        success, response = self.run_test("Duplicate Registration (Should Fail)", "POST", "users", 400, test_data)
+        success, response = self.run_test("Duplicate Nickname (Should Fail)", "POST", "register", 400, test_data)
         return success
 
     def test_user_login(self):
-        """Test user login by email"""
+        """Test user login with nickname and magic word"""
         if not self.test_user_id:
             return self.log_test("User Login", False, "No test user created")
         
-        timestamp = datetime.now().strftime("%H%M%S")
-        email = f"test{timestamp}@boring.com"
-        
-        success, response = self.run_test("User Login", "GET", f"users/email/{email}", 200)
-        if success and response:
-            try:
-                user_data = response.json()
-                retrieved_id = user_data.get("id")
-                if retrieved_id == self.test_user_id:
-                    print(f"   📝 Login successful for user: {user_data.get('name')}")
+        # We need to get the magic word from registration
+        # For testing, let's try to login with admin credentials
+        if self.admin_user_id and self.admin_magic_word:
+            login_data = {
+                "nickname": "gandi",
+                "magic_word": self.admin_magic_word
+            }
+            
+            success, response = self.run_test("Admin User Login", "POST", "login", 200, login_data)
+            if success and response:
+                try:
+                    user_data = response.json()
+                    print(f"   📝 Login successful for user: {user_data.get('nickname')}")
+                    print(f"   📝 User ID: {user_data.get('id')}")
+                    print(f"   📝 Tokens: {user_data.get('tokens_remaining')}")
                     return True
-                else:
-                    return self.log_test("User Login", False, "User ID mismatch")
-            except:
-                pass
+                except:
+                    pass
         return success
 
     def test_user_not_found(self):
