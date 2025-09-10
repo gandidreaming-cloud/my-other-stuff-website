@@ -135,6 +135,10 @@ def prepare_for_mongo(data):
     return data
 
 def parse_from_mongo(item):
+    # Remove MongoDB ObjectId which is not JSON serializable
+    if '_id' in item:
+        del item['_id']
+    
     if isinstance(item.get('created_at'), str):
         item['created_at'] = datetime.fromisoformat(item['created_at'])
     # Keep winner_date as string - don't convert to datetime
