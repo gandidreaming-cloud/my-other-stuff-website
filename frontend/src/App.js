@@ -854,7 +854,7 @@ function App() {
                 </p>
               </div>
               {/* Interaction Buttons */}
-              <div className="flex justify-center gap-1 items-center mb-3">
+              <div className="flex justify-center gap-1 items-center mb-2">
                 <Button 
                   variant="ghost" 
                   size="sm" 
@@ -876,9 +876,10 @@ function App() {
                     <polygon points="22,2 15,22 11,13 2,9"></polygon>
                   </svg>
                 </Button>
+              </div>
 
-                <span className="text-black mx-2">|</span>
-
+              {/* Leave a comment button */}
+              <div className="text-center mb-3">
                 {!showCommentForm ? (
                   <Button
                     onClick={() => setShowCommentForm(true)}
