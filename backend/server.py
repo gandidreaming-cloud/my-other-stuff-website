@@ -428,7 +428,17 @@ async def set_winner(submission_id: str, admin_user_id: str):
         {"$set": {"is_winner": True, "winner_datetime": current_datetime.isoformat()}}
     )
     
-    return {"message": "Winner set successfully!", "winner_id": submission_id}
+    # Delete all other approved submissions (cleanup lottery pool)
+    delete_result = await db.submissions.delete_many({
+        "id": {"$ne": submission_id},
+        "status": "approved"
+    })
+    
+    return {
+        "message": "Winner set successfully!", 
+        "winner_id": submission_id,
+        "deleted_submissions": delete_result.deleted_count
+    }
 
 # Interaction routes
 @api_router.post("/submissions/{submission_id}/interactions")
