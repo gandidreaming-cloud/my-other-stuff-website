@@ -802,17 +802,14 @@ function App() {
           {/* Today's Winner */}
           {todayWinner ? (
             <div className="mb-8">
-              <div className="text-center mb-6">
-                <div className="flex justify-center items-center gap-2 mb-2">
-                  <span className="text-xl">😴</span>
-                  <h2 className="text-2xl font-light text-black">today's boring winner</h2>
-                </div>
-                <div className="text-sm text-black">
+              <div className="text-center mb-4">
+                <h2 className="text-2xl font-light text-black">today's boring winner</h2>
+                <div className="text-sm text-black mt-1">
                   {new Date(todayWinner.created_at).toLocaleDateString('en-GB').replace(/\//g, '.')}
                 </div>
               </div>
               
-              <div className="bg-white border border-black rounded-lg p-6 text-center mb-6">
+              <div className="bg-white border border-black rounded-lg p-4 text-center mb-3 max-w-2xl mx-auto">
                 <p className="text-lg leading-relaxed text-black">
                   {todayWinner.text_content}
                 </p>
@@ -824,7 +821,7 @@ function App() {
                 </div>
                 {(todayWinner.instagram_link || todayWinner.tiktok_link) && (
                   <div className="text-sm text-black">
-                    their{' '}
+                    winner's{' '}
                     {todayWinner.instagram_link && (
                       <>
                         <a 
