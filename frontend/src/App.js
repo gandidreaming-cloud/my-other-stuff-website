@@ -1033,7 +1033,7 @@ function App() {
           )}
 
           {/* Bottom Navigation Buttons */}
-          <div className="flex justify-center gap-8 mt-12 pb-8">
+          <div className="flex justify-center gap-4 mt-12 pb-8">
             <Button
               variant="ghost"
               onClick={() => setShowHowItWorks(true)}
