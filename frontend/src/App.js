@@ -828,9 +828,9 @@ function App() {
                           href={todayWinner.instagram_link} 
                           target="_blank" 
                           rel="noopener noreferrer"
-                          className="flex items-center gap-1 text-black hover:underline font-medium"
+                          className="flex items-center gap-1 text-black hover:underline font-medium text-sm"
                         >
-                          <span className="text-lg">📷</span>
+                          <span className="w-4 h-4 border border-black rounded-sm flex items-center justify-center text-xs">ig</span>
                           instagram
                         </a>
                       )}
@@ -839,9 +839,9 @@ function App() {
                           href={todayWinner.tiktok_link} 
                           target="_blank" 
                           rel="noopener noreferrer"
-                          className="flex items-center gap-1 text-black hover:underline font-medium"
+                          className="flex items-center gap-1 text-black hover:underline font-medium text-sm"
                         >
-                          <span className="text-lg">🎵</span>
+                          <span className="w-4 h-4 border border-black rounded-sm flex items-center justify-center text-xs">tt</span>
                           tiktok
                         </a>
                       )}
