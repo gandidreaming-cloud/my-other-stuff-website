@@ -871,7 +871,10 @@ function App() {
                 </Button>
                 
                 <Button variant="ghost" size="sm" className="text-black hover:bg-black hover:text-white px-2 py-1">
-                  share
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="text-black">
+                    <line x1="22" y1="2" x2="11" y2="13"></line>
+                    <polygon points="22,2 15,22 11,13 2,9"></polygon>
+                  </svg>
                 </Button>
 
                 <span className="text-black mx-2">|</span>
