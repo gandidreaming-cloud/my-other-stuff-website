@@ -898,51 +898,29 @@ function App() {
             </Card>
           )}
 
-          {/* Info Cards */}
-          <div className="grid md:grid-cols-3 gap-6">
-            <Card className="border-black">
-              <CardHeader>
-                <CardTitle className="flex items-center gap-2 text-black">
-                  <Trophy className="w-5 h-5" />
-                  how it works
-                </CardTitle>
-              </CardHeader>
-              <CardContent className="text-sm text-black space-y-2">
-                <p>• submit your most boring moment using a token</p>
-                <p>• admin reviews and approves submissions</p>
-                <p>• one random winner chosen daily at 4pm berlin time</p>
-                <p>• everyone can like, comment, and share the winner</p>
-              </CardContent>
-            </Card>
-            
-            <Card className="border-black">
-              <CardHeader>
-                <CardTitle className="flex items-center gap-2 text-black">
-                  <Users className="w-5 h-5" />
-                  community rules
-                </CardTitle>
-              </CardHeader>
-              <CardContent className="text-sm text-black space-y-2">
-                <p>• celebrate the ordinary and mundane</p>
-                <p>• no judgment, only support</p>
-                <p>• keep it boring and wholesome</p>
-                <p>• share your everyday moments</p>
-              </CardContent>
-            </Card>
-            
-            <Card className="border-black">
-              <CardHeader>
-                <CardTitle className="flex items-center gap-2 text-black">
-                  <FileText className="w-5 h-5" />
-                  your stats
-                </CardTitle>
-              </CardHeader>
-              <CardContent className="text-sm text-black space-y-2">
-                <p>tokens remaining: <span className="font-bold">{currentUser.tokens_remaining}</span></p>
-                <p>member since: {new Date(currentUser.created_at).toLocaleDateString()}</p>
-                <p>boring level: <span className="font-bold">maximum</span></p>
-              </CardContent>
-            </Card>
+          {/* Bottom Navigation Buttons */}
+          <div className="flex justify-center gap-8 mt-12 pb-8">
+            <Button
+              variant="ghost"
+              onClick={() => setShowHowItWorks(true)}
+              className="text-black hover:bg-black hover:text-white"
+            >
+              how it works
+            </Button>
+            <Button
+              variant="ghost"
+              onClick={() => setShowCommunityRules(true)}
+              className="text-black hover:bg-black hover:text-white"
+            >
+              community rules
+            </Button>
+            <Button
+              variant="ghost"
+              onClick={() => setShowYourStats(true)}
+              className="text-black hover:bg-black hover:text-white"
+            >
+              your stats
+            </Button>
           </div>
         </div>
 
