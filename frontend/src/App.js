@@ -950,10 +950,27 @@ function App() {
                   size="sm" 
                   className="flex items-center gap-1 text-black hover:bg-black hover:text-white px-1 py-1 cursor-pointer"
                   onClick={() => {
-                    const commentsSection = document.querySelector('.comments-section');
-                    if (commentsSection) {
-                      commentsSection.scrollIntoView({ behavior: 'smooth' });
+                    // First, ensure comments are loaded
+                    if (todayWinner && interactions.length === 0) {
+                      fetchInteractions(todayWinner.id);
                     }
+                    
+                    // Scroll to comments section
+                    setTimeout(() => {
+                      const commentsSection = document.querySelector('.comments-section');
+                      if (commentsSection) {
+                        commentsSection.scrollIntoView({ 
+                          behavior: 'smooth',
+                          block: 'center'
+                        });
+                      }
+                      
+                      // Also show the comment form if no comments exist
+                      const comments = interactions.filter(int => int.type === "comment");
+                      if (comments.length === 0) {
+                        setShowCommentForm(true);
+                      }
+                    }, 100);
                   }}
                 >
                   <MessageCircle className="w-4 h-4" />
