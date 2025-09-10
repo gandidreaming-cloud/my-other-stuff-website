@@ -502,7 +502,10 @@ class BoringAppAPITester:
                 interactions = response.json()
                 print(f"   📝 Found {len(interactions)} interactions")
                 for interaction in interactions:
-                    print(f"   📝 {interaction.get('type')}: {interaction.get('content', 'N/A')[:30]}...")
+                    interaction_type = interaction.get('type')
+                    content = interaction.get('content', 'N/A')
+                    likes_count = interaction.get('likes_count', 'N/A')
+                    print(f"   📝 {interaction_type}: {content[:30]}... (likes: {likes_count})")
                 return True
             except:
                 pass
