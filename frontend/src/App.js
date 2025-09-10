@@ -890,18 +890,7 @@ function App() {
               
               {/* Comments Section */}
               <div className="space-y-4">
-                {!showCommentForm ? (
-                  <div className="text-center">
-                    <Button
-                      onClick={() => setShowCommentForm(true)}
-                      variant="ghost"
-                      size="sm"
-                      className="text-black hover:bg-black hover:text-white"
-                    >
-                      leave a comment
-                    </Button>
-                  </div>
-                ) : (
+                {showCommentForm && (
                   <form onSubmit={handleComment} className="flex gap-2 justify-center">
                     <Textarea
                       value={commentText}
