@@ -798,32 +798,36 @@ function App() {
                     {todayWinner.text_content}
                   </p>
                   
-                  <div className="flex justify-center gap-3 mb-4">
-                    {todayWinner.instagram_link && (
-                      <a 
-                        href={todayWinner.instagram_link} 
-                        target="_blank" 
-                        rel="noopener noreferrer"
-                        className="text-black hover:underline font-medium"
-                      >
-                        instagram
-                      </a>
-                    )}
-                    {todayWinner.tiktok_link && (
-                      <a 
-                        href={todayWinner.tiktok_link} 
-                        target="_blank" 
-                        rel="noopener noreferrer"
-                        className="text-black hover:underline font-medium"
-                      >
-                        tiktok
-                      </a>
-                    )}
-                  </div>
-                  
                   <div className="text-sm text-black mb-4">
                     by <span className="font-medium">{todayWinner.user_nickname}</span>
                   </div>
+                  
+                  {(todayWinner.instagram_link || todayWinner.tiktok_link) && (
+                    <div className="flex justify-center gap-4 mt-4">
+                      {todayWinner.instagram_link && (
+                        <a 
+                          href={todayWinner.instagram_link} 
+                          target="_blank" 
+                          rel="noopener noreferrer"
+                          className="flex items-center gap-1 text-black hover:underline font-medium"
+                        >
+                          <span className="text-lg">📷</span>
+                          instagram
+                        </a>
+                      )}
+                      {todayWinner.tiktok_link && (
+                        <a 
+                          href={todayWinner.tiktok_link} 
+                          target="_blank" 
+                          rel="noopener noreferrer"
+                          className="flex items-center gap-1 text-black hover:underline font-medium"
+                        >
+                          <span className="text-lg">🎵</span>
+                          tiktok
+                        </a>
+                      )}
+                    </div>
+                  )}
                 </div>
                 
                 {/* Interaction Buttons */}
