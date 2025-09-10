@@ -70,23 +70,59 @@ class BoringAppAPITester:
         return success
 
     def test_user_registration(self):
-        """Test user registration"""
+        """Test user registration with new API structure"""
         timestamp = datetime.now().strftime("%H%M%S")
         test_data = {
-            "name": f"Test User {timestamp}",
-            "email": f"test{timestamp}@boring.com",
-            "boring_answer": "I spent 3 hours organizing my sock drawer by color and fabric type."
+            "nickname": f"testuser{timestamp}",
+            "email": f"test{timestamp}@boring.com"
         }
         
-        success, response = self.run_test("User Registration", "POST", "users", 200, test_data)
+        success, response = self.run_test("User Registration", "POST", "register", 200, test_data)
         if success and response:
             try:
                 user_data = response.json()
-                self.test_user_id = user_data.get("id")
+                self.test_user_id = user_data.get("user_id")
+                magic_word = user_data.get("magic_word")
                 print(f"   📝 Created user ID: {self.test_user_id}")
-                print(f"   📝 Tokens: {user_data.get('tokens_remaining', 'N/A')}")
+                print(f"   📝 Magic word: {magic_word}")
                 return True
             except:
+                pass
+        return success
+
+    def test_admin_registration(self):
+        """Test admin user registration (gandi.pacific@gmail.com should get 999 tokens)"""
+        test_data = {
+            "nickname": "gandi",
+            "email": "gandi.pacific@gmail.com"
+        }
+        
+        success, response = self.run_test("Admin Registration", "POST", "register", 200, test_data)
+        if success and response:
+            try:
+                user_data = response.json()
+                self.admin_user_id = user_data.get("user_id")
+                self.admin_magic_word = user_data.get("magic_word")
+                print(f"   📝 Created admin user ID: {self.admin_user_id}")
+                print(f"   📝 Admin magic word: {self.admin_magic_word}")
+                
+                # Verify admin has 999 tokens by getting user details
+                user_success, user_response = self.run_test("Get Admin User", "GET", f"users/{self.admin_user_id}", 200)
+                if user_success and user_response:
+                    admin_details = user_response.json()
+                    tokens = admin_details.get("tokens_remaining")
+                    is_admin = admin_details.get("is_admin")
+                    print(f"   📝 Admin tokens: {tokens}")
+                    print(f"   📝 Is admin: {is_admin}")
+                    if tokens == 999 and is_admin:
+                        print("   ✅ Admin user correctly configured with 999 tokens and admin status")
+                        return True
+                    else:
+                        print(f"   ❌ Admin user not properly configured. Tokens: {tokens}, Is admin: {is_admin}")
+                        return False
+                return True
+            except Exception as e:
+                print(f"   ❌ Error processing admin registration: {e}")
                 pass
         return success
 
