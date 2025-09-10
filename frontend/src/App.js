@@ -992,7 +992,32 @@ function App() {
 
               {/* Leave a comment button */}
               <div className="text-center mb-4">
-                {!showCommentForm && showComments ? (
+                {!showComments ? (
+                  <Button
+                    onClick={() => {
+                      setShowComments(true);
+                      // Load comments if needed
+                      if (todayWinner && interactions.length === 0) {
+                        fetchInteractions(todayWinner.id);
+                      }
+                      // Scroll to comments section
+                      setTimeout(() => {
+                        const commentsSection = document.querySelector('.comments-section');
+                        if (commentsSection) {
+                          commentsSection.scrollIntoView({ 
+                            behavior: 'smooth',
+                            block: 'center'
+                          });
+                        }
+                      }, 100);
+                    }}
+                    variant="ghost"
+                    size="sm"
+                    className="text-black hover:bg-black hover:text-white px-2 py-1"
+                  >
+                    leave a comment
+                  </Button>
+                ) : (
                   <Button
                     onClick={() => setShowCommentForm(true)}
                     variant="ghost"
@@ -1001,7 +1026,7 @@ function App() {
                   >
                     leave a comment
                   </Button>
-                ) : null}
+                )}
               </div>
               
               {/* Comments Section */}
