@@ -1059,6 +1059,8 @@ function App() {
                     <div className="space-y-2 max-w-2xl mx-auto">
                       {(() => {
                         const comments = interactions.filter(int => int.type === "comment");
+                        console.log("Filtered comments:", comments); // Debug log
+                        console.log("Total interactions:", interactions); // Debug log
                         
                         if (comments.length === 0) {
                           return (
