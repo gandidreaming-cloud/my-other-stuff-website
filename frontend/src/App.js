@@ -618,7 +618,8 @@ function App() {
                     id="nickname"
                     value={regForm.nickname}
                     onChange={(e) => setRegForm({...regForm, nickname: e.target.value})}
-                    className="w-full bg-transparent border-0 border-b border-black focus:border-black focus:ring-0 rounded-none px-0 pb-1"
+                    className="w-full bg-transparent border border-black focus:border-black focus:ring-0 rounded px-2 py-1"
+                    style={{ borderWidth: '0.5px' }}
                     required
                   />
                 </div>
@@ -630,7 +631,8 @@ function App() {
                     type="email"
                     value={regForm.email}
                     onChange={(e) => setRegForm({...regForm, email: e.target.value})}
-                    className="w-full bg-transparent border-0 border-b border-black focus:border-black focus:ring-0 rounded-none px-0 pb-1"
+                    className="w-full bg-transparent border border-black focus:border-black focus:ring-0 rounded px-2 py-1"
+                    style={{ borderWidth: '0.5px' }}
                     required
                   />
                 </div>
