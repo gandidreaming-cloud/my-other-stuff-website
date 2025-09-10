@@ -877,22 +877,24 @@ function App() {
               </CardContent>
             </Card>
           ) : (
-            <Card className="mb-8 text-center py-12 border-black">
+            <Card className="mb-8 text-center py-12 border-black relative">
               <CardContent>
                 <Clock className="w-12 h-12 text-black mx-auto mb-4" />
-                <h2 className="text-2xl font-light text-black mb-6">no winner yet today</h2>
+                <h2 className="text-2xl font-light text-black mb-4">no winner yet today</h2>
                 
-                {/* Submit Button */}
+                {/* Submit Button - closer to title */}
                 <Button 
                   onClick={() => setShowSubmission(true)} 
                   disabled={currentUser.tokens_remaining <= 0}
-                  className="bg-white text-black border-2 border-black hover:bg-black hover:text-white mb-8"
+                  className="bg-white text-black border-2 border-black hover:bg-black hover:text-white"
                 >
                   submit boring content
                 </Button>
                 
-                {/* Lottery info at bottom in small text */}
-                <p className="text-black text-sm opacity-60">the daily lottery at GMT+2</p>
+                {/* Lottery info at bottom */}
+                <div className="absolute bottom-4 left-0 right-0">
+                  <p className="text-black text-xs opacity-60">the daily lottery at GMT+2</p>
+                </div>
               </CardContent>
             </Card>
           )}
