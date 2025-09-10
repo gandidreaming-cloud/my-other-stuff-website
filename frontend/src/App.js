@@ -785,12 +785,12 @@ function App() {
             <Card className="mb-8 border-2 border-black bg-white">
               <CardHeader className="text-center">
                 <div className="flex justify-center items-center gap-2 mb-2">
-                  <Trophy className="w-6 h-6 text-black" />
+                  <span className="text-xl">😴</span>
                   <CardTitle className="text-black">today's boring winner</CardTitle>
                 </div>
-                <Badge className="bg-black text-white">
-                  {new Date(todayWinner.created_at).toLocaleDateString()}
-                </Badge>
+                <div className="text-sm text-black">
+                  {new Date(todayWinner.created_at).toLocaleDateString('en-GB')}
+                </div>
               </CardHeader>
               <CardContent className="space-y-4">
                 <div className="bg-white border border-black rounded-lg p-4 text-center">
