@@ -325,17 +325,25 @@ async def run_daily_lottery(admin_user_id: str):
     # Strict owner-only check
     await verify_owner_admin(admin_user_id)
     
-    today = datetime.now(timezone.utc).date().isoformat()
+    # Check if there's a current winner (within 20 hours)
+    twenty_hours_ago = datetime.now(timezone.utc) - timedelta(hours=20)
+    existing_winner = await db.submissions.find_one({
+        "is_winner": True, 
+        "winner_datetime": {"$gte": twenty_hours_ago.isoformat()}
+    })
     
-    # Check if today's winner already exists
-    existing_winner = await db.submissions.find_one({"is_winner": True, "winner_date": today})
     if existing_winner:
-        return {"message": "Today's winner already selected", "winner_id": existing_winner["id"]}
+        return {"message": "Current winner is still active", "winner_id": existing_winner["id"]}
     
-    # Get all approved submissions that haven't won yet
+    # Reset all previous winners
+    await db.submissions.update_many(
+        {"is_winner": True},
+        {"$set": {"is_winner": False}}
+    )
+    
+    # Get all approved submissions that haven't won recently
     approved_submissions = await db.submissions.find({
-        "status": "approved",
-        "is_winner": False
+        "status": "approved"
     }).to_list(1000)
     
     if not approved_submissions:
@@ -345,10 +353,11 @@ async def run_daily_lottery(admin_user_id: str):
     import random
     winner = random.choice(approved_submissions)
     
-    # Update winner
+    # Update winner with current datetime
+    current_datetime = datetime.now(timezone.utc)
     await db.submissions.update_one(
         {"id": winner["id"]},
-        {"$set": {"is_winner": True, "winner_date": today}}
+        {"$set": {"is_winner": True, "winner_datetime": current_datetime.isoformat()}}
     )
     
     return {"message": "Winner selected!", "winner_id": winner["id"]}
