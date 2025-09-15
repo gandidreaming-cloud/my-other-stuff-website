@@ -845,20 +845,20 @@ function App() {
             {/* Three Column Layout */}
             <div className="grid grid-cols-3 items-start">
               {/* Left: User Info with hover logout */}
-              <div className="text-left relative">
-                <div className="group cursor-pointer flex items-start gap-2">
-                  <div>
-                    <div className="text-xl font-medium text-black">{currentUser.nickname}</div>
-                    <div className="text-sm text-black">tokens: {currentUser.tokens_remaining}</div>
+              <div className="text-left">
+                <div className="group cursor-pointer">
+                  <div className="text-xl font-medium text-black">
+                    {currentUser.nickname}
+                    <Button 
+                      onClick={handleLogout}
+                      variant="ghost"
+                      size="sm"
+                      className="opacity-0 group-hover:opacity-100 transition-opacity duration-200 text-black hover:bg-black hover:text-white text-xs ml-1 px-1 py-0 inline-block"
+                    >
+                      (logout)
+                    </Button>
                   </div>
-                  <Button 
-                    onClick={handleLogout}
-                    variant="ghost"
-                    size="sm"
-                    className="opacity-0 group-hover:opacity-100 transition-opacity duration-200 text-black hover:bg-black hover:text-white text-xs whitespace-nowrap px-1 py-0 mt-0"
-                  >
-                    logout
-                  </Button>
+                  <div className="text-sm text-black">tokens: {currentUser.tokens_remaining}</div>
                 </div>
               </div>
               
