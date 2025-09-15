@@ -555,12 +555,6 @@ async def toggle_comment_like(comment_id: str, user_id: str):
         # Remove like
         await db.interactions.delete_one({"id": existing_like["id"]})
         
-        # Remove token from comment author (if they have any)
-        await db.users.update_one(
-            {"id": comment_data["user_id"], "tokens_remaining": {"$gt": 0}},
-            {"$inc": {"tokens_remaining": -1}}
-        )
-        
         return {"message": "Comment like removed"}
     else:
         # Add like
@@ -576,13 +570,22 @@ async def toggle_comment_like(comment_id: str, user_id: str):
         interaction_data = prepare_for_mongo(interaction_obj.dict())
         await db.interactions.insert_one(interaction_data)
         
-        # Give 1 token to comment author
-        await db.users.update_one(
-            {"id": comment_data["user_id"]},
-            {"$inc": {"tokens_remaining": 1}}
-        )
+        # Check if comment now has multiple of 10 likes for token reward
+        total_likes = await db.interactions.count_documents({
+            "comment_id": comment_id,
+            "type": "like"
+        })
         
-        return {"message": "Comment liked, author rewarded with 1 token"}
+        # Award token every 10 likes (10, 20, 30, etc.)
+        if total_likes > 0 and total_likes % 10 == 0:
+            await db.users.update_one(
+                {"id": comment_data["user_id"]},
+                {"$inc": {"tokens_remaining": 1}}
+            )
+            
+            return {"message": f"Comment liked! Author rewarded with 1 token for reaching {total_likes} likes"}
+        
+        return {"message": "Comment liked"}
 
 @api_router.get("/comments/{comment_id}/likes-count")
 async def get_comment_likes_count(comment_id: str):
