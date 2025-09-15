@@ -824,7 +824,7 @@ function App() {
             <div className="grid grid-cols-3 items-start">
               {/* Left: User Info with hover logout */}
               <div className="text-left relative">
-                <div className="group cursor-pointer flex items-start gap-1">
+                <div className="group cursor-pointer flex items-start gap-2">
                   <div>
                     <div className="text-xl font-medium text-black">{currentUser.nickname}</div>
                     <div className="text-sm text-black">tokens: {currentUser.tokens_remaining}</div>
@@ -833,7 +833,7 @@ function App() {
                     onClick={handleLogout}
                     variant="ghost"
                     size="sm"
-                    className="opacity-0 group-hover:opacity-100 transition-opacity duration-200 text-black hover:bg-black hover:text-white text-xs whitespace-nowrap px-1 py-0 mt-1"
+                    className="opacity-0 group-hover:opacity-100 transition-opacity duration-200 text-black hover:bg-black hover:text-white text-xs whitespace-nowrap px-1 py-0 mt-0"
                   >
                     logout
                   </Button>
