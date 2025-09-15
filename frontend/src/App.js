@@ -519,8 +519,21 @@ function App() {
   };
 
   const rejectWinner = async () => {
-    // Get another random submission
-    await runLottery();
+    // Get another random submission with loading effect
+    setLotteryLoading(true);
+    setRandomSubmission(null);
+    
+    // Add suspense
+    await new Promise(resolve => setTimeout(resolve, 1000));
+    
+    try {
+      const response = await axios.get(`${API}/random-submission?admin_user_id=${currentUser.id}`);
+      setRandomSubmission(response.data);
+      setLotteryLoading(false);
+    } catch (error) {
+      setLotteryLoading(false);
+      toast.error(error.response?.data?.detail || "Failed to get random submission");
+    }
   };
 
   const clearWinner = async () => {
