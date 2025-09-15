@@ -1413,11 +1413,26 @@ function App() {
         <Dialog open={showLotteryPreview} onOpenChange={setShowLotteryPreview}>
           <DialogContent className="max-w-2xl border-black">
             <DialogHeader>
-              <DialogTitle className="text-black">lottery preview</DialogTitle>
+              <DialogTitle className="text-black">🎲 lottery preview</DialogTitle>
             </DialogHeader>
-            {randomSubmission && (
+            
+            {lotteryLoading ? (
               <div className="space-y-4">
-                <div className="bg-white border border-black rounded-lg p-4">
+                <div className="text-center py-8">
+                  <div className="text-lg text-black mb-4">🎰 selecting random boring story...</div>
+                  <div className="flex justify-center space-x-1">
+                    <div className="w-2 h-2 bg-black rounded-full animate-bounce"></div>
+                    <div className="w-2 h-2 bg-black rounded-full animate-bounce" style={{animationDelay: '0.1s'}}></div>
+                    <div className="w-2 h-2 bg-black rounded-full animate-bounce" style={{animationDelay: '0.2s'}}></div>
+                  </div>
+                </div>
+              </div>
+            ) : randomSubmission ? (
+              <div className="space-y-4">
+                <div className="text-center text-sm text-black opacity-70 mb-2">
+                  🎯 randomly selected:
+                </div>
+                <div className="bg-white border border-black rounded-lg p-4 animate-pulse-once">
                   <div className="text-sm text-black font-medium mb-2">
                     by {randomSubmission.user_nickname}
                   </div>
@@ -1447,17 +1462,22 @@ function App() {
                     onClick={confirmWinner}
                     className="bg-white text-black border-2 border-black hover:bg-black hover:text-white"
                   >
-                    set as winner
+                    ✅ set as winner
                   </Button>
                   <Button 
                     onClick={rejectWinner}
                     variant="outline"
                     className="border-black text-black hover:bg-black hover:text-white"
+                    disabled={lotteryLoading}
                   >
-                    try another one
+                    🎲 try another one
                   </Button>
                   <Button 
-                    onClick={() => setShowLotteryPreview(false)}
+                    onClick={() => {
+                      setShowLotteryPreview(false);
+                      setRandomSubmission(null);
+                      setLotteryLoading(false);
+                    }}
                     variant="ghost"
                     className="text-black hover:bg-black hover:text-white"
                   >
@@ -1465,7 +1485,7 @@ function App() {
                   </Button>
                 </div>
               </div>
-            )}
+            ) : null}
           </DialogContent>
         </Dialog>
 
