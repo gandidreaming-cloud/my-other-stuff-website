@@ -1462,8 +1462,7 @@ function App() {
               <p>• submit your most boring moment using a token</p>
               <p>• admin reviews and approves submissions</p>
               <p>• one random winner chosen daily at GMT+2</p>
-              <p>• when someone likes your comment, you earn 1 token</p>
-              <p>• everyone can comment and share the winner</p>
+              <p>• when someone likes your comment, you earn 1 token per 10 likes</p>
             </div>
           </DialogContent>
         </Dialog>
