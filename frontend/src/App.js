@@ -32,6 +32,7 @@ function App() {
   const [showComments, setShowComments] = useState(false);
   const [randomSubmission, setRandomSubmission] = useState(null);
   const [showLotteryPreview, setShowLotteryPreview] = useState(false);
+  const [lotteryLoading, setLotteryLoading] = useState(false);
   
   // Onboarding states
   const [showOnboarding, setShowOnboarding] = useState(true);
