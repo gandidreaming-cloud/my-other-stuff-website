@@ -488,10 +488,18 @@ function App() {
 
   const runLottery = async () => {
     try {
+      setLotteryLoading(true);
+      setShowLotteryPreview(true);
+      
+      // Add some suspense with a delay
+      await new Promise(resolve => setTimeout(resolve, 1500));
+      
       const response = await axios.get(`${API}/random-submission?admin_user_id=${currentUser.id}`);
       setRandomSubmission(response.data);
-      setShowLotteryPreview(true);
+      setLotteryLoading(false);
     } catch (error) {
+      setLotteryLoading(false);
+      setShowLotteryPreview(false);
       toast.error(error.response?.data?.detail || "Failed to get random submission");
     }
   };
