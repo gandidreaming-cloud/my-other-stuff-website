@@ -1,0 +1,14 @@
+{
+  "name": "boooring-backend",
+  "version": "1.0.0",
+  "description": "Boooring - where ordinary is extraordinary",
+  "main": "backend/server.py",
+  "scripts": {
+    "start": "uvicorn backend.server:app --host 0.0.0.0 --port $PORT",
+    "dev": "uvicorn backend.server:app --reload"
+  },
+  "dependencies": {},
+  "engines": {
+    "python": "3.11"
+  }
+}
